@@ -18,6 +18,7 @@
         zoom: 7,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       });
+
       layer_0 = new google.maps.FusionTablesLayer({
         query: {
           select: "geometry",
@@ -27,6 +28,8 @@
         styleId: 2,
         templateId: 2
       });
+      layer_0.setMap(map)
+
       layer_1 = new google.maps.FusionTablesLayer({
         query: {
           select: "geometry",
@@ -36,6 +39,7 @@
         styleId: 2,
         templateId: 2
       });
+      layer_1.setMap(map)
     }
     google.maps.event.addDomListener(window, 'load', initialize);
   </script>
