@@ -13,8 +13,8 @@
     <!-- When the page loads, load the basemap and layers and assemble them -->
     <script type="text/javascript">
       var map;
-      var layer_0;
-      var layer_1;
+      var precinct_layer;
+      var pp_layer;
       
       function initialize() {
         map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -23,7 +23,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        layer_0 = new google.maps.FusionTablesLayer({
+        precinct_layer = new google.maps.FusionTablesLayer({
           query: {
             select: "col5",
             from: "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"
@@ -32,9 +32,9 @@
           styleId: 2,
           templateId: 2
         });
-        layer_0.setMap(map)
+        precinct_layer.setMap(map)
         
-        layer_1 = new google.maps.FusionTablesLayer({
+        pp_layer = new google.maps.FusionTablesLayer({
           query: {
             select: "col9",
             from: "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY"
@@ -50,7 +50,7 @@
           styleId: 2,
           templateId: 2
         });
-        layer_1.setMap(map)
+        pp_layer.setMap(map)
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
