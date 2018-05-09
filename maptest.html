@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <style>
-    #map-canvas { width:100%; height:100%; }
-    .layer-wizard-search-label { font-family: sans-serif };
-  </style>
-  <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
-  </script>
-  <script type="text/javascript">
-    var map;
-    var layer_0;
-    var layer_1;
-    function initialize() {
-      map = new google.maps.Map(document.getElementById('map-canvas'), {
-        center: new google.maps.LatLng(35.40504720215536, -79.79899755009092),
-        zoom: 7,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
 
-      layer_0 = new google.maps.FusionTablesLayer({
-        query: {
-          select: "col5",
-          from: "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"
-        },
-        map: map,
-        styleId: 2,
-        templateId: 2
-      });
-      layer_0.setMap(map)
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      layer_1 = new google.maps.FusionTablesLayer({
-        query: {
-          select: "col9",
-          from: "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY"
-        },
-        map: map,
-        styleId: 2,
-        templateId: 2
-      });
-      layer_1.setMap(map)
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
-  </script>
+    <!-- Load the map canvas -->
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
+    </script>
+
+    <!-- When the page loads, load the basemap and layers and assemble them -->
+    <script type="text/javascript">
+      var map;
+      var layer_0;
+      var layer_1;
+      
+      function initialize() {
+        map = new google.maps.Map(document.getElementById('map-canvas'), {
+          center: new google.maps.LatLng(35.40504720215536, -79.79899755009092),
+          zoom: 7,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        layer_0 = new google.maps.FusionTablesLayer({
+          query: {
+            select: "col5",
+            from: "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"
+          },
+          map: map,
+          styleId: 2,
+          templateId: 2
+        });
+        layer_0.setMap(map)
+        
+        layer_1 = new google.maps.FusionTablesLayer({
+          query: {
+            select: "col9",
+            from: "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY"
+          },
+          map: map,
+          styleId: 2,
+          templateId: 2
+        });
+        layer_1.setMap(map)
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+
+    <div class="container">
+      <div>
+
+        <!-- This is where the map canvas is inserted by the googleapis.com script -->
+        <div id="map-canvas"></div>
+
+      </div>
+    </div>
   </body>
 </html>
