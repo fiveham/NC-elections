@@ -7,7 +7,7 @@
 
     <!-- Load the map canvas -->
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
+      src="https://maps.googleapis.com/maps/api/js?sensor=false">
     </script>
 
     <!-- When the page loads, load the basemap and layers and assemble them -->
@@ -29,7 +29,7 @@
             preserveViewport: true
           }
         );
-        pp_layer.setMap(map)
+        pp_layer.setMap(map);
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
