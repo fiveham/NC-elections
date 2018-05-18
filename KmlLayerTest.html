@@ -5,11 +5,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Load the map canvas -->
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
-    </script>
-
     <!-- When the page loads, load the basemap and layers and assemble them -->
     <script type="text/javascript">
       var map;
@@ -32,8 +27,13 @@
       }
       //google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+    
+    <!-- Load the map canvas -->
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&callback=initialize">
+    </script>
   </head>
-  <body onload="initialize();">
+  <body>
 
     <div class="container">
       <div>
