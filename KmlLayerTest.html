@@ -17,12 +17,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         
-        pp_layer = google.maps.KmlLayer(
-          'https://fiveham.github.io/NC_Politics/Polling_Places.kml', 
-          {
-            preserveViewport: true
-          }
-        );
+        pp_layer = google.maps.KmlLayer('https://fiveham.github.io/NC_Politics/Polling_Places.kml');
         pp_layer.setMap(map);
       }
       //google.maps.event.addDomListener(window, 'load', initialize);
