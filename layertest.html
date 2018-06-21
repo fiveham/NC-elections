@@ -11,28 +11,25 @@
     <!-- When the page loads, load the basemap and layers and assemble them -->
     <script type="text/javascript">
       var map;
-      var layer_county;
-      var layer_house;
-      var layer_senate;
-      var layer_congress;
-      var layer_prosecutor;
+      var layers;
       
-      function gen_layer(selectVal, docId, map){
-        var q = {
-          select: selectVal,
-          from: docId
-        };
-        
-        var dict = {
-          query: q,
+      function layer_vis(index){
+        for (var i = 0; i < layers.length; i++){
+          layers[i].setMap(null)
+        }
+        layers[index].setMap(map)
+      }
+      
+      function gen_layer(selectVal, docId){
+        return new google.maps.FusionTablesLayer({
+          query: {
+            select: selectVal,
+            from: docId
+          },
           map: map,
           styleId: 2,
           templateId: 2
-        };
-        
-        var layer = new google.maps.FusionTablesLayer(dict);
-        layer.setMap(map)
-        return layer
+        });
       }
       
       function initialize() {
@@ -42,11 +39,15 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         
-        layer_county = gen_layer("col3", "1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5", map);
-        layer_house = gen_layer("col3", "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB", map);
-        layer_senate = gen_layer("col3", "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5", map);
-        layer_congress = gen_layer("col3", "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", map);
-        layer_prosecutor = gen_layer("col3", "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", map);
+        var layer_county = gen_layer("col3", "1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5");
+        var layer_house = gen_layer("col3", "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB");
+        var layer_senate = gen_layer("col3", "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5");
+        var layer_prosecutor = gen_layer("col3", "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI");
+        var layer_congress = gen_layer("col3", "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T");
+        
+        layers = [layer_county, layer_house, layer_senate, layer_prosecutor, layer_congress]
+        
+        layer_vis(0)
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -56,7 +57,15 @@
     <div id="content">
       <div id="map-controls">
         <div id="layer-select">
-          <p>[layer selection controls will go here]</p>
+          <p>
+            <form action="">
+  			      <input type="radio" name="layer" value="county" onclick="layer_vis(0);"/> County<br/>
+  			      <input type="radio" name="layer" value="house" onclick="layer_vis(1);"/> State House<br/>
+  			      <input type="radio" name="layer" value="senate" onclick="layer_vis(2);"/> State Senate<br/>
+  			      <input type="radio" name="layer" value="prosecutor" onclick="layer_vis(3);"/> Prosecutorial<br/>
+  			      <input type="radio" name="layer" value="congress" onclick="layer_vis(4);"/> Congressional
+		        </form>
+          </p>
         </div>
         <div id="address-lookup">
           <p>[address lookup will go here later]</p>
