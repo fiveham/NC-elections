@@ -5,7 +5,7 @@
 
     <!-- Load the map canvas -->
     <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places">
     </script>
 
     <!-- When the page loads, load the basemap and layers and assemble them -->
@@ -45,9 +45,67 @@
         var layer_prosecutor = gen_layer("col3", "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI");
         var layer_congress = gen_layer("col3", "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T");
         
-        layers = [layer_county, layer_house, layer_senate, layer_prosecutor, layer_congress]
+        layers = [layer_county, layer_house, layer_senate, layer_prosecutor, layer_congress];
+        layer_vis(0);
+	
+	// Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
-        layer_vis(0)
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+	      
+	var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -59,16 +117,18 @@
         <div id="layer-select">
           <p>
             <form action="">
-  			      <input type="radio" name="layer" value="county" onclick="layer_vis(0);" checked="checked"/> County<br/>
-  			      <input type="radio" name="layer" value="house" onclick="layer_vis(1);"/> State House<br/>
-  			      <input type="radio" name="layer" value="senate" onclick="layer_vis(2);"/> State Senate<br/>
-  			      <input type="radio" name="layer" value="prosecutor" onclick="layer_vis(3);"/> Prosecutorial<br/>
-  			      <input type="radio" name="layer" value="congress" onclick="layer_vis(4);"/> Congressional
-		        </form>
+              <input type="radio" name="layer" value="county" onclick="layer_vis(0);" checked="checked"/> County<br/>
+  	      <input type="radio" name="layer" value="house" onclick="layer_vis(1);"/> State House<br/>
+  	      <input type="radio" name="layer" value="senate" onclick="layer_vis(2);"/> State Senate<br/>
+  	      <input type="radio" name="layer" value="prosecutor" onclick="layer_vis(3);"/> Prosecutorial<br/>
+  	      <input type="radio" name="layer" value="congress" onclick="layer_vis(4);"/> Congressional
+            </form>
           </p>
         </div>
         <div id="address-lookup">
-          <p>[address lookup will go here later]</p>
+          <p>
+	    <input id="pac-input" class="controls" type="text" placeholder="Search Box"/>
+	  </p>
         </div>
       </div>
       <div id="map-itself">
