@@ -3,8 +3,6 @@
   <head>
     <link rel="stylesheet" type="text/css" href="layertest.css">
 
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-
     <!-- Load the map canvas -->
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA">
@@ -54,13 +52,19 @@
     </script>
   </head>
   <body>
-
-    <div class="container">
-      <div>
-
+    
+    <div id="content">
+      <div id="map-controls">
+        <div id="layer-select">
+          <p>[layer selection controls will go here]</p>
+        </div>
+        <div id="address-lookup">
+          <p>[address lookup will go here later]</p>
+        </div>
+      </div>
+      <div id="map-itself">
         <!-- This is where the map canvas is inserted by the googleapis.com script -->
         <div id="map-canvas"></div>
-
       </div>
     </div>
   </body>
