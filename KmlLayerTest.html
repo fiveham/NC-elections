@@ -95,6 +95,7 @@
         left: 0;
         width: 15%;
         background: #0000FF;
+        text-align: right;
       }
       
       .right-side {
@@ -105,11 +106,28 @@
         width: 85%;
         background: #FF0000;
       }
+      
+      .layer-select {
+        display: inline-block;
+        text-align: left;
+      }
     </style>
   </head>
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    <div class="left-side"></div>
+    <div class="left-side">
+      <div class="layer-select">
+        <p>
+          <form action="">
+            <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
+  	        <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
+  	        <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
+  	        <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
+  	        <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
+          </form>
+        </p>
+      </div>
+    </div>
     <div id="map" class="right-side"></div>
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
