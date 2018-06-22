@@ -11,25 +11,35 @@
     <!-- When the page loads, load the basemap and layers and assemble them -->
     <script type="text/javascript">
       var map;
-      var layers;
+      var docIds = ["1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5", 
+		   "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB",
+		   "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5",
+		   "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
+		   "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T"];
+      var layers = [null, null, null, null, null];
       
-      function layer_vis(index){
-        for (var i = 0; i < layers.length; i++){
-          layers[i].setMap(null)
-        }
-        layers[index].setMap(map)
-      }
-      
-      function gen_layer(selectVal, docId){
+      function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
           query: {
-            select: selectVal,
+            select: "col3",
             from: docId
           },
           map: map,
           styleId: 2,
           templateId: 2
         });
+      }
+      
+      function show_layer(index){
+        for (var i = 0; i < layers.length; i++){
+	  if(layers[i]){
+            layers[i].setMap(null)
+	  }
+        }
+	if(!layers[index]){
+          layers[index] = gen_layer(docIds[index])
+	}
+        layers[index].setMap(map)
       }
       
       function initialize() {
@@ -39,14 +49,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         
-        var layer_county = gen_layer("col3", "1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5");
-        var layer_house = gen_layer("col3", "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB");
-        var layer_senate = gen_layer("col3", "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5");
-        var layer_prosecutor = gen_layer("col3", "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI");
-        var layer_congress = gen_layer("col3", "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T");
-        
-        layers = [layer_county, layer_house, layer_senate, layer_prosecutor, layer_congress];
-        layer_vis(0);
+        show_layer(0);
 	
 	// Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
