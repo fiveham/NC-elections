@@ -79,5 +79,6 @@
 }
 
 #layer-select {
+    display: inline-block;
     text-align: left;
 }
