@@ -107,12 +107,17 @@
         width: 85%;
       }
       
-      .layer-select {
+      div.layer-select {
         display: inline-block;
         text-align: left;
-        background: #7FEEEEEE;
+        opacity: 0.5;
+        background: #EEEEEE;
         padding-left: 1em;
         padding-right: 1em;
+      }
+      
+      p.layer-select {
+        opacity: 1;
       }
     </style>
   </head>
@@ -121,7 +126,7 @@
     <div id="map" class="right-side"></div>
     <div class="left-side">
       <div class="layer-select">
-        <p>
+        <p class="layer-select">
           <form action="">
             <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
   	        <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
