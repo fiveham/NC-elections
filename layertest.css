@@ -73,3 +73,7 @@
       #target {
         width: 345px;
       }
+
+#content {
+    text-align: center;
+}
