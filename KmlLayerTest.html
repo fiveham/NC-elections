@@ -111,11 +111,15 @@
         display: inline-block;
         text-align: left;
         background: #EEEEEE;
+        opacity: 0.5;
+        padding-left: 1em;
+        padding-right: 1em;
       }
     </style>
   </head>
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map" class="right-side"></div>
     <div class="left-side">
       <div class="layer-select">
         <p>
@@ -129,7 +133,6 @@
         </p>
       </div>
     </div>
-    <div id="map" class="right-side"></div>
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
