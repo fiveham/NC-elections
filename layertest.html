@@ -61,8 +61,12 @@
         var redsquare = document.getElementById("badge");
         pushme.push(redsquare);
         
-        
-        
+        var install = pushme[pushme.length - 1];
+        for(var i = 0; i < pushme.length; i++){
+          var extract = pushme[i];
+          pushme[i] = install;
+          install = extract;
+	}
         
         
         
