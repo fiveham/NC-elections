@@ -89,23 +89,22 @@
         width: 345px;
       }
       
-      .left-side {
+      .side {
         position: absolute;
         height: 100vh;
         top: 0;
-        left: 0;
+        display: inline-block;
+        float: left;
+      }
+      
+      .left {
         min-width: 15%;
         background: #DDDDFF;
         text-align: center;
-        display: inline-block;
       }
       
-      .right-side {
-        position: absolute;
-        height: 100vh;
-        top: 0;
-        right: 0;
-        width: 85%;
+      .right {
+        max-width: 85%;
       }
       
       .layer-select {
@@ -115,23 +114,31 @@
         padding-right: 1em;
         margin: 10px;
       }
+      
+      .overall-page {
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
-    <div id="map" class="right-side"></div>
-    <div class="left-side">
-      <div class="layer-select">
-        <p>
-          <form action="">
-            <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
-  	        <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
-  	        <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
-  	        <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
-  	        <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
-          </form>
-        </p>
+    <div class="overall-page">
+      <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
+      
+      <div class="left side">
+        <div class="layer-select">
+          <p>
+            <form action="">
+              <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
+              <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
+              <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
+              <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
+              <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
+            </form>
+          </p>
+        </div>
       </div>
+      
+      <div id="map" class="right side"></div>
     </div>
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
