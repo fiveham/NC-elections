@@ -91,18 +91,26 @@
         background: white;
         margin: 10px;
       }
+      
+      .layer-header{
+        text-align: center;
+        font-weight: bold;
+      }
     </style>
   </head>
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
     <div id="layer-select">
+      <div class="layer-header">
+        District Map
+      </div>
       <p>
         <form action="">
           <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
-  	      <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
-  	      <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
-  	      <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
-  	      <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
+          <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
+          <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
+          <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
+          <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
         </form>
       </p>
     </div>
