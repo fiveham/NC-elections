@@ -108,6 +108,38 @@
     </div>
     <div id="map"></div>
     <script>
+      var map;
+      var docIds = ["1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5", 
+		                "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB",
+		                "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5",
+		                "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
+		                "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T"];
+      var layers = [null, null, null, null, null];
+      
+      function gen_layer(docId){
+        return new google.maps.FusionTablesLayer({
+          query: {
+            select: "col3",
+            from: docId
+          },
+          map: map,
+          styleId: 2,
+          templateId: 2
+        });
+      }
+      
+      function show_layer(index){
+        for (var i = 0; i < layers.length; i++){
+	        if(layers[i]){
+            layers[i].setMap(null)
+	        }
+        }
+	      if(!layers[index]){
+          layers[index] = gen_layer(docIds[index])
+	      }
+        layers[index].setMap(map)
+      }
+      
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
       // pick list containing a mix of places and predicted search terms.
@@ -117,12 +149,12 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       function initAutocomplete() {
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(35.40504720215536, -79.79899755009092),
           zoom: 7,
-          mapTypeId: 'roadmap'
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-
+        
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
@@ -185,8 +217,8 @@
           });
           map.fitBounds(bounds);
         });
+        show_layer(0);
       }
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places&callback=initAutocomplete"
          async defer></script>
