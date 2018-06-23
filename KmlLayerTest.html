@@ -11,12 +11,30 @@
       #map {
         height: 100%;
       }
+      
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
       }
+      
+      .outer{
+        overflow: hidden;
+        width: 100%;
+        background: #ddd;
+      }
+      
+      .inner1{
+        float: left;
+        background: #fdd;
+      }
+      
+      .inner2{
+        overflow: hidden;
+        background: #ddf;
+      }
+      
       #description {
         font-family: Roboto;
         font-size: 15px;
@@ -85,6 +103,7 @@
         font-weight: 500;
         padding: 6px 12px;
       }
+      
       #target {
         width: 345px;
       }
@@ -121,9 +140,9 @@
     </style>
   </head>
   <body>
-    <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
-
-      <div class="left side">
+    
+    <div class="outer">
+      <div class="inner1">
         <div class="layer-select">
           <p>
             <form action="">
@@ -136,9 +155,13 @@
           </p>
         </div>
       </div>
-      
-      <div id="map" class="right side"></div>
+      <div class="inner2">
+        <div id="map" class="right side"></div>
+      </div>
+    </div>
     
+    <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
+
     <script>
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
