@@ -112,7 +112,9 @@
           <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
           <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
           <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
-          <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional
+          <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional<br/>
+          <input type="radio" name="layer" value="pollingplaces" onclick="show_layer(5);"/> Poling Places<br/>
+          <input type="radio" name="layer" value="precincts" onclick="show_layer(6);"/> Voting Precincts
         </form>
       </p>
     </div>
@@ -120,16 +122,19 @@
     <script>
       var map;
       var docIds = ["1XJpKRopXfB3EaSAql_aX1O90LLNzHad7AxRYEhB5", 
-		                "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB",
-		                "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5",
-		                "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
-		                "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T"];
-      var layers = [null, null, null, null, null];
+                    "1uatKulJ00H4RpnLTvhsIZCzqSHEtKbnwgGMS7AKB",
+                    "1fOsSlJu62r33ojReVFAzXRZiU4N426MPUOaOxeu5",
+                    "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
+                    "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",
+                    "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY",
+                    "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"];
+      var selects = ["col3", "col3", "col3", "col3", "col3", "col9", "col5"];
+      var layers = [null, null, null, null, null, null, null];
       
-      function gen_layer(docId){
+      function gen_layer(docId, column){
         return new google.maps.FusionTablesLayer({
           query: {
-            select: "col3",
+            select: column,
             from: docId
           },
           map: map,
@@ -139,14 +144,14 @@
       }
       
       function show_layer(index){
-        for (var i = 0; i < layers.length; i++){
-	        if(layers[i]){
+        for(var i = 0; i < layers.length; i++){
+          if(layers[i]){
             layers[i].setMap(null)
-	        }
+          }
         }
-	      if(!layers[index]){
-          layers[index] = gen_layer(docIds[index])
-	      }
+        if(!layers[index]){
+          layers[index] = gen_layer(docIds[index], selects[index]);
+        }
         layers[index].setMap(map)
       }
       
