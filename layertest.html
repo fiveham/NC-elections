@@ -56,6 +56,19 @@
         var searchBox = new google.maps.places.SearchBox(input);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
+        //Move the red square to the corner of the map
+        var pushme = map.controls[google.maps.ControlPosition.TOP_LEFT];
+        var redsquare = document.getElementById("badge");
+        pushme.push(redsquare);
+        
+        
+        
+        
+        
+        
+        
+        
+        
         // Bias the SearchBox results towards current map's viewport.
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
