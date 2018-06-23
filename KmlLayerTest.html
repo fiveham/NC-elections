@@ -98,16 +98,21 @@
         text-align: center;
         font-weight: bold;
       }
+      
+      .unpad {
+        margin: 0;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
     <input id="pac-input" class="controls" type="text" placeholder="Find an Address">
     <div id="layer-select">
-      <div class="layer-header">
+      <div class="layer-header" class="unpad">
         District Map
       </div>
-      <p>
-        <form action="">
+      <p class="unpad">
+        <form action="" class="unpad">
           <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
           <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
           <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
