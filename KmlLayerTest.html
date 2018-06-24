@@ -137,10 +137,9 @@
                     "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",
                     "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY",
                     "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"];
-      var selects = ["col3", "col3", "col3", "col3", "col3", "col9", "col5"];
       var layers = [null, null, null, null, null, null, null];
       
-      function gen_layer(docId, column){
+      function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
           query: {
             select: "geometry",
@@ -159,7 +158,7 @@
           }
         }
         if(!layers[index]){
-          layers[index] = gen_layer(docIds[index], selects[index]);
+          layers[index] = gen_layer(docIds[index]);
         }
         layers[index].setMap(map)
       }
