@@ -116,7 +116,7 @@
         District Map
       </div>
       <p class="unpad">
-        <form action="" class="unpad">
+        <form action="" class="unpad" id="layer-form">
           <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
           <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
           <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
@@ -174,9 +174,9 @@
 		return val;
 	  }
 	  
-	  function gen_map(){
+	  function get_url_params(){
 	    var url = window.location.href;
-	    var q = url.indexOf("?");
+		var q = url.indexOf("?");
 		var params = (q == -1 
 		    ? [] 
 			: url.slice(1 + url.indexOf("?"))
@@ -187,6 +187,10 @@
 		  kv = param.split("=");
 		  param_dict[kv[0]] = kv[1];
 		}
+		return param_dict;
+	  }
+	  
+	  function gen_map(param_dict){
 		var lat = careful_extract(param_dict, "lat", parseFloat, -90, 90, 35.40504720215536);
 		var lng = careful_extract(param_dict, "lng", parseFloat, -180, 180, -79.79899755009092);
 		var zoom = careful_extract(param_dict, "zoom", parseInt, 0, 22, 7);
@@ -207,7 +211,8 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       
       function initAutocomplete() {
-        map = gen_map();
+	    var url_params = get_url_params()
+        map = gen_map(url_params);
         
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
@@ -271,10 +276,17 @@
           });
           map.fitBounds(bounds);
         });
-        show_layer(0);
+		
+        var layer = careful_extract(url_params, "layer", parseInt, 0, 6, 0);
+		show_layer(layer);
+		if(layer != 0){ //By default the 0 layer is turned on
+		  var inputs = document.getElementById("layer-form").getElementsByTagName("input");
+		  inputs[0].removeAttribute("checked");
+		  inputs[layer].setAttribute("checked", "checked");
+		}
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places&callback=initAutocomplete"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3xDAh-5Rut3GZd5b74dHHRpJZGiv0GOg&libraries=places&callback=initAutocomplete"
          async defer></script>
   </body>
 </html>
