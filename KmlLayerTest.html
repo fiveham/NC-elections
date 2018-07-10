@@ -117,27 +117,29 @@
       </div>
       <p class="unpad">
         <form action="" class="unpad" id="layer-form">
-          <input type="radio" name="layer" value="county" onclick="show_layer(0);" checked="checked"/> County<br/>
-          <input type="radio" name="layer" value="house" onclick="show_layer(1);"/> State House<br/>
-          <input type="radio" name="layer" value="senate" onclick="show_layer(2);"/> State Senate<br/>
-          <input type="radio" name="layer" value="prosecutor" onclick="show_layer(3);"/> Prosecutorial<br/>
-          <input type="radio" name="layer" value="congress" onclick="show_layer(4);"/> Congressional<br/>
-          <input type="radio" name="layer" value="pollingplaces" onclick="show_layer(5);"/> Poling Places<br/>
-          <input type="radio" name="layer" value="precincts" onclick="show_layer(6);"/> Voting Precincts
+	  <input type="radio" name="layer" value="statewide" onclick="show_layer(0);" checked="checked"/> Statewide<br/>
+          <input type="radio" name="layer" value="county" onclick="show_layer(1);"/> County<br/>
+          <input type="radio" name="layer" value="house" onclick="show_layer(2);"/> State House<br/>
+          <input type="radio" name="layer" value="senate" onclick="show_layer(3);"/> State Senate<br/>
+          <input type="radio" name="layer" value="prosecutor" onclick="show_layer(4);"/> Prosecutorial<br/>
+          <input type="radio" name="layer" value="congress" onclick="show_layer(5);"/> Congressional<br/>
+          <input type="radio" name="layer" value="pollingplaces" onclick="show_layer(6);"/> Poling Places<br/>
+          <input type="radio" name="layer" value="precincts" onclick="show_layer(7);"/> Voting Precincts
         </form>
       </p>
     </div>
     <div id="map"></div>
     <script>
       var map;
-      var docIds = ["1iTQ7iZRRxGdcadetmCJswWfdIDzKiXPm24K49lv_",
+      var docIds = ["1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP",
+		    "1iTQ7iZRRxGdcadetmCJswWfdIDzKiXPm24K49lv_",
                     "1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj",
                     "1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr",
                     "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
                     "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",
                     "1q7zEN4x8TYzW4X12uObksXj1CEjEmsw4b8NzGwIY",
                     "14LC0EpgkyzWMJqKVKseGFWuLlF7Tl8LsnGzw7jRW"];
-      var layers = [null, null, null, null, null, null, null];
+      var layers = [null, null, null, null, null, null, null, null];
       
       function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
@@ -277,7 +279,7 @@
           map.fitBounds(bounds);
         });
 		
-        var layer = careful_extract(url_params, "layer", parseInt, 0, 6, 0);
+        var layer = careful_extract(url_params, "layer", parseInt, 0, 7, 0);
 		show_layer(layer);
 		if(layer != 0){ //By default the 0 layer is turned on
 		  var inputs = document.getElementById("layer-form").getElementsByTagName("input");
