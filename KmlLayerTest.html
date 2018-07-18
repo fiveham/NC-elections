@@ -287,11 +287,9 @@
 		
         var layer = careful_extract(url_params, "layer", parseInt, 0, 7, 0);
         show_layer(layer);
-        //if(layer != 0){ //By default the 0 layer is turned on
-        //  var inputs = document.getElementById("layer-form").getElementsByTagName("input");
-        //  inputs[0].removeAttribute("checked");
-        //  inputs[layer].setAttribute("checked", "checked");
-        //}
+        if(layer != 0){ //By default the 0 layer is turned on
+          document.getElementById("layer-dropdown").selectedIndex = layer;
+        }
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places&callback=initAutocomplete"
