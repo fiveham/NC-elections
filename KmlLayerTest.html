@@ -116,16 +116,16 @@
         District Map
       </div>
       <p class="unpad">
-        <form action="" class="unpad" id="layer-form">
-          <input type="radio" name="layer" value="statewide" onclick="show_layer(0);" checked="checked" id="show_layer_statewide" /><label for="show_layer_statewide"> Statewide</label><br/>
-          <input type="radio" name="layer" value="county" onclick="show_layer(1);" id="show_layer_county"/><label for="show_layer_county"> County</label><br/>
-          <input type="radio" name="layer" value="house" onclick="show_layer(2);" id="show_layer_house"/><label for="show_layer_house"> State House</label><br/>
-          <input type="radio" name="layer" value="senate" onclick="show_layer(3);" id="show_layer_senate"/><label for="show_layer_senate"> State Senate</label><br/>
-          <input type="radio" name="layer" value="prosecutor" onclick="show_layer(4);" id="show_layer_prosecutor"/><label for="show_layer_prosecutor"> Prosecutorial</label><br/>
-          <input type="radio" name="layer" value="congress" onclick="show_layer(5);" id="show_layer_congress"/><label for="show_layer_congress"> Congressional</label><br/>
-          <input type="radio" name="layer" value="pollingplaces" onclick="show_layer(6);" id="show_layer_pollingplaces"/><label for="show_layer_pollingplaces"> Poling Places</label><br/>
-          <input type="radio" name="layer" value="precincts" onclick="show_layer(7);" id="show_layer_precincts"/><label for="show_layer_precincts"> Voting Precincts</label>
-        </form>
+        <select id="layer-dropdown" onchange="select_layer();">
+            <option value="0">Statewide</option>
+            <option value="1">County</option>
+            <option value="2">State House</option>
+            <option value="3">State Senate</option>
+            <option value="4">Prosecutorial</option>
+            <option value="5">Congressional</option>
+            <option value="6">Polling Places</option>
+            <option value="7">Voting Precincts</option>
+        </select>
       </p>
     </div>
     <div id="map"></div>
@@ -164,6 +164,17 @@
         }
         layers[index].setMap(map);
       }
+	  
+	  function select_layer(){
+		var menu = document.getElementById("layer-dropdown");
+		var value = parseInt(menu.value)
+		if(value){
+			alert(value);
+		} else{
+			alert("falsey");
+		}
+		show_layer(value)
+	  }
 	  
 	  function careful_extract(params, key, func, min, max, def){
 	    var val = def;
@@ -213,7 +224,7 @@
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       
       function initAutocomplete() {
-	    var url_params = get_url_params()
+        var url_params = get_url_params();
         map = gen_map(url_params);
         
         // Create the search box and link it to the UI element.
@@ -280,12 +291,12 @@
         });
 		
         var layer = careful_extract(url_params, "layer", parseInt, 0, 7, 0);
-		show_layer(layer);
-		if(layer != 0){ //By default the 0 layer is turned on
-		  var inputs = document.getElementById("layer-form").getElementsByTagName("input");
-		  inputs[0].removeAttribute("checked");
-		  inputs[layer].setAttribute("checked", "checked");
-		}
+        show_layer(layer);
+        //if(layer != 0){ //By default the 0 layer is turned on
+        //  var inputs = document.getElementById("layer-form").getElementsByTagName("input");
+        //  inputs[0].removeAttribute("checked");
+        //  inputs[layer].setAttribute("checked", "checked");
+        //}
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places&callback=initAutocomplete"
