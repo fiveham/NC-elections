@@ -125,6 +125,7 @@
             <option value="5">Congressional</option>
             <option value="6">Polling Places</option>
             <option value="7">Voting Precincts</option>
+            <option value="8">District Court</option>
         </select>
       </p>
     </div>
@@ -138,8 +139,9 @@
                     "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
                     "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",
                     "1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7",
-                    "1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj"];
-      var layers = [null, null, null, null, null, null, null, null];
+                    "1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj",
+                    "1Vn5M6wSVksmzEMZqkXCzWqOIlQ389wmv0w1-xpV-"];
+      var layers = [null, null, null, null, null, null, null, null, null];
       
       function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
@@ -285,7 +287,7 @@
           map.fitBounds(bounds);
         });
 		
-        var layer = careful_extract(url_params, "layer", parseInt, 0, 7, 0);
+        var layer = careful_extract(url_params, "layer", parseInt, 0, 8, 0);
         show_layer(layer);
         if(layer != 0){ //By default the 0 layer is turned on
           document.getElementById("layer-dropdown").selectedIndex = layer;
