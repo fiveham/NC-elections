@@ -72,6 +72,8 @@
         max-width: 400px;
         width: 400px;
         width: calc(100% - 215px);
+        position: absolute;
+        display: none;
       }
       
       #pac-input:focus {
@@ -98,6 +100,8 @@
         padding-right: 4px;
         padding-left: 4px;
         border:1px solid #a9a9a9;
+        position: absolute;
+        display: none;
       }
       
       .layer-header{
@@ -223,10 +227,18 @@
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-      
+      function show_extras(){
+        document.getElementById("layer-select").style.display = "block";
+        document.getElementById("pac-input").style.display = "block";
+      }
+	    
       function initAutocomplete() {
         var url_params = get_url_params();
         map = gen_map(url_params);
+        var triggers = ["tilesloaded","mousemove","zoom_changed","idle"];
+        for(var i = 0; i < triggers.length; i++){
+          google.maps.event.addListenerOnce(map, triggers[i], show_extras);
+        }
         
         // Create the search box and link it to the UI element.
         var input = document.getElementById('pac-input');
