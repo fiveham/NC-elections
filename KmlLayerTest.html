@@ -139,17 +139,16 @@
     <div id="map"></div>
     <script>
       var map;
-      var docIds = ["1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP",
-		    "10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB",
-                    "1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj",
-                    "1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr",
-                    "1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",
-                    "1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",
-                    "1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7",
-                    "1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj",
-                    "1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9",
-                    "1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz"];
-      var layers = [null, null, null, null, null, null, null, null, null, null];
+      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP",layer:null},
+                  {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB",layer:null},
+                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj",layer:null},
+                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr",layer:null},
+                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",layer:null},
+                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",layer:null},
+                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7",layer:null},
+                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj",layer:null},
+                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9",layer:null},
+                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz",layer:null}];
       
       function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
@@ -164,61 +163,60 @@
       }
       
       function show_layer(index){
-        for(var i = 0; i < layers.length; i++){
-          if(layers[i]){
-            layers[i].setMap(null);
+        for(var i = 0; i < docs.length; i++){
+          if(docs[i].layer){
+            docs[i].layer.setMap(null);
           }
         }
-        if(!layers[index]){
-          layers[index] = gen_layer(docIds[index]);
+        if(!docs[index].layer){
+          docs[index].layer = gen_layer(docs[index].docId);
         }
-        layers[index].setMap(map);
+        docs[index].layer.setMap(map);
       }
-	  
-	  function select_layer(){
-		var menu = document.getElementById("layer-dropdown");
-		var value = parseInt(menu.value)
-		show_layer(value)
-	  }
-	  
-	  function careful_extract(params, key, func, min, max, def){
-	    var val = def;
-		if(key in params){
-		  var param_val = func(params[key]);
-		  if(min <= param_val && param_val <= max){
-		    val = param_val;
-		  }
-		}
-		return val;
-	  }
-	  
-	  function get_url_params(){
-	    var url = window.location.href;
-		var q = url.indexOf("?");
-		var params = (q == -1 
-		    ? [] 
-			: url.slice(1 + url.indexOf("?"))
-			    .split("&"));
-		var param_dict = {};
-		for(var i = 0; i < params.length; i++){
-		  param = params[i];
-		  kv = param.split("=");
-		  param_dict[kv[0]] = kv[1];
-		}
-		return param_dict;
-	  }
-	  
-	  function gen_map(param_dict){
-		var lat = careful_extract(param_dict, "lat", parseFloat, -90, 90, 35.40504720215536);
-		var lng = careful_extract(param_dict, "lng", parseFloat, -180, 180, -79.79899755009092);
-		var zoom = careful_extract(param_dict, "zoom", parseInt, 0, 22, 7);
-		
-		return new google.maps.Map(document.getElementById('map'), {
+      
+      function select_layer(){
+        var menu = document.getElementById("layer-dropdown");
+        var value = parseInt(menu.value);
+        show_layer(value);
+      }
+      
+      function careful_extract(params, key, func, min, max, def){
+        var val = def;
+        if(key in params){
+          var param_val = func(params[key]);
+          if(min <= param_val && param_val <= max){
+            val = param_val;
+          }
+	}
+	return val;
+      }
+      
+      function get_url_params(){
+        var url = window.location.href;
+        var q = url.indexOf("?");
+        var params = (q == -1
+            ? []
+            : url.slice(q+1).split("&"));
+        var param_dict = {};
+        for(var i = 0; i < params.length; i++){
+          param = params[i];
+          kv = param.split("=");
+          param_dict[kv[0]] = kv[1];
+        }
+        return param_dict;
+      }
+      
+      function gen_map(param_dict){
+        var lat = careful_extract(param_dict, "lat", parseFloat, -90, 90, 35.40504720215536);
+        var lng = careful_extract(param_dict, "lng", parseFloat, -180, 180, -79.79899755009092);
+        var zoom = careful_extract(param_dict, "zoom", parseInt, 0, 22, 7);
+        
+        return new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(lat, lng),
           zoom: zoom,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-	  }
+      }
       
       // This example adds a search box to a map, using the Google Place Autocomplete
       // feature. People can enter geographical searches. The search box will return a
@@ -231,7 +229,7 @@
         document.getElementById("layer-select").style.display = "block";
         document.getElementById("pac-input").style.display = "block";
       }
-	    
+      
       function initAutocomplete() {
         var url_params = get_url_params();
         map = gen_map(url_params);
