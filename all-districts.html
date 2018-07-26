@@ -201,14 +201,15 @@
             val = param_val;
           }
         }
-	      return val;
+        return val;
       }
       
       function find_layer(name){
-        var options = document.getElementById("layer-select").options;
+        var select = document.getElementById("layer-select");
+        var options = select.options;
         var lc_param = name.toLowerCase();
-        for(var i = 0; i < options.length; i++){
-          var option = options[i];
+        for(var i = 0; i < select.length; i++){
+          var option = options.item(i);
           if(option.value.toLowerCase().equals(lc_param)){
             return i;
           }
