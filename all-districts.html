@@ -210,7 +210,7 @@
         var lc_param = name.toLowerCase();
         for(var i = 0; i < select.length; i++){
           var option = options.item(i);
-          if(option.value.toLowerCase().equals(lc_param)){
+          if(option.value.toLowerCase() === lc_param){
             return i;
           }
         }
