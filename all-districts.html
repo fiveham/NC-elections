@@ -222,11 +222,8 @@
       }
       
       function index_layer(text){
-        if(isNaN(text)){
-          return find_layer(text);
-        } else{
-          return parseInt10(text);
-        }
+        var parsed = parseInt10(text);
+        return isNaN(parsed) ? find_layer(text) : parsed;
       }
       
       function get_url_params(){
