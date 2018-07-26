@@ -136,16 +136,16 @@
       </div>
       <p>
         <select id="layer-dropdown" onchange="select_layer();">
-            <option value="0">Statewide</option>
-            <option value="1">County</option>
-            <option value="2">State House</option>
-            <option value="3">State Senate</option>
-            <option value="4">Prosecutorial</option>
-            <option value="5">Congressional</option>
-            <option value="6">Polling Places</option>
-            <option value="7">Voting Precincts</option>
-            <option value="8">District Court</option>
-            <option value="9">Superior Court</option>
+            <option value="statewide"    >Statewide</option>
+            <option value="county"       >County</option>
+            <option value="house"        >State House</option>
+            <option value="senate"       >State Senate</option>
+            <option value="prosecutorial">Prosecutorial</option>
+            <option value="congress"     >Congressional</option>
+            <option value="pollingplace" >Polling Places</option>
+            <option value="precinct"     >Voting Precincts</option>
+            <option value="district"     >District Court</option>
+            <option value="superior"     >Superior Court</option>
         </select>
       </p>
     </div>
@@ -200,8 +200,28 @@
           if(min <= param_val && param_val <= max){
             val = param_val;
           }
-	}
-	return val;
+        }
+	      return val;
+      }
+      
+      function find_layer(name){
+        var options = document.getElementById("layer-select").options;
+        var lc_param = name.toLowerCase();
+        for(var i = 0; i < options.length; i++){
+          var option = options[i];
+          if(option.value.toLowerCase().equals(lc_param)){
+            return i;
+          }
+        }
+        return 0;
+      }
+      
+      function index_layer(text){
+        if(isNan(text)){
+          return find_layer(text);
+        } else{
+          return parseInt(text);
+        }
       }
       
       function get_url_params(){
@@ -314,7 +334,7 @@
           map.fitBounds(bounds);
         });
 		
-        var layer = careful_extract(url_params, "layer", parseInt, 0, 9, 0);
+        var layer = careful_extract(url_params, "layer", index_layer, 0, 9, 0);
         show_layer(layer);
         if(layer != 0){ //By default the 0 layer is turned on
           document.getElementById("layer-dropdown").selectedIndex = layer;
