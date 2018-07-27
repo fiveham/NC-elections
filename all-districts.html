@@ -152,6 +152,8 @@
     <div id="map"></div>
     <script>
       var map;
+      var permanent_marker;
+      var icon;
       var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP",layer:null},
                   {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB",layer:null},
                   {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj",layer:null},
@@ -256,16 +258,41 @@
         });
       }
       
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
-      
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
       function show_extras(){
         document.getElementById("layer-select").style.display = "block";
         document.getElementById("pac-input").style.display = "block";
+      }
+      
+      function go_to_place(place){
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return null;
+        }
+        
+        if(!icon){
+          icon = {
+            url: "https://maps.google.com/mapfiles/ms/micons/ylw-pushpin.png",
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)};
+        }
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: icon,
+          position: place.geometry.location
+        });
+        
+        var bounds = new google.maps.LatLngBounds();
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+        map.fitBounds(bounds);
+        
+        return marker;
       }
       
       function initAutocomplete() {
@@ -276,69 +303,31 @@
           google.maps.event.addListenerOnce(map, triggers[i], show_extras);
         }
         
-        // Create the search box and link it to the UI element.
+        // Create the autocomplete object, and link it to the UI element.
         var input = document.getElementById('pac-input');
-        var searchBox = new google.maps.places.SearchBox(input);
+        var autocomplete = new google.maps.places.Autocomplete(input, {types: ["geocode"]});
+        autocomplete.setFields(["geometry"]);
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
         //Move the layer-select box to the center left
         var layer_select = document.getElementById("layer-select");
         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(layer_select);
         
-        // Bias the SearchBox results towards current map's viewport.
+        // Bias the Autocomplete results towards current map's viewport.
         map.addListener('bounds_changed', function() {
           searchBox.setBounds(map.getBounds());
         });
         
-        var markers = [];
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener('places_changed', function() {
-          var places = searchBox.getPlaces();
-          
-          if (places.length == 0) {
-            return;
-          }
-          
-          // Clear out the old markers.
-          markers.forEach(function(marker) {
-            marker.setMap(null);
-          });
-          markers = [];
-          
-          // For each place, get the icon, name and location.
-          var bounds = new google.maps.LatLngBounds();
-          places.forEach(function(place) {
-            if (!place.geometry) {
-              console.log("Returned place contains no geometry");
-              return;
-            }
-            var icon = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25)
-            };
-            
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-              map: map,
-              icon: icon,
-              title: place.name,
-              position: place.geometry.location
-            }));
-            
-            if (place.geometry.viewport) {
-              // Only geocodes have viewport.
-              bounds.union(place.geometry.viewport);
-            } else {
-              bounds.extend(place.geometry.location);
-            }
-          });
-          map.fitBounds(bounds);
-        });
-		
+        // Listen for the event fired when the user selects a prediction and place a
+        // marker on the map for that place.
+        autocomplete.addListener('place_changed', 
+            function(){
+              if(permanent_marker){
+                permanent_marker.setMap(null);
+              }
+              permanent_marker = go_to_place(autocomplete.getPlace());
+            });
+        
         var layer = careful_extract(url_params, "layer", index_layer, 0, 9, 0);
         show_layer(layer);
         if(layer != 0){ //By default the 0 layer is turned on
