@@ -136,16 +136,16 @@
       </div>
       <p>
         <select id="layer-dropdown" onchange="select_layer();">
-            <option value="statewide"    >Statewide</option>
-            <option value="county"       >County</option>
-            <option value="house"        >State House</option>
-            <option value="senate"       >State Senate</option>
-            <option value="prosecutorial">Prosecutorial</option>
-            <option value="congress"     >Congressional</option>
-            <option value="pollingplace" >Polling Places</option>
-            <option value="precinct"     >Voting Precincts</option>
-            <option value="district"     >District Court</option>
-            <option value="superior"     >Superior Court</option>
+          <option value="house"        >State House</option>
+          <option value="senate"       >State Senate</option>
+          <option value="statewide"    >Statewide</option>
+          <option value="prosecutorial">Prosecutorial</option>
+          <option value="congress"     >Congressional</option>
+          <option value="county"       >County</option>
+          <option value="superior"     >Superior Court</option>
+          <option value="district"     >District Court</option>
+          <option value="precinct"     >Voting Precincts</option>
+          <option value="pollingplace" >Polling Places</option>
         </select>
       </p>
     </div>
@@ -154,16 +154,28 @@
       var map;
       var permanent_marker;
       var icon;
-      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP",layer:null},
-                  {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB",layer:null},
-                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj",layer:null},
-                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr",layer:null},
-                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI",layer:null},
-                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T",layer:null},
-                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7",layer:null},
-                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj",layer:null},
-                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9",layer:null},
-                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz",layer:null}];
+      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", layer:null, value:"statewide"},
+                  {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB", layer:null, value:"county"},
+                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", layer:null, value:"house"},
+                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", layer:null, value:"senate"},
+                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", layer:null, value:"prosecutorial"},
+                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", layer:null, value:"congress"},
+                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", layer:null, value:"pollingplace"},
+                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", layer:null, value:"precinct"},
+                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", layer:null, value:"district"},
+                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", layer:null, value:"superior"}];
+      sort_docs();
+      
+      function sort_docs(){
+        var options = document.getElementById("layer-dropdown").options;
+        var valueToIndex = {};
+        for(var i = 0; i < options.length; i++){
+          valueToIndex[options.item(i).value] = i;
+        }
+        docs.sort(function(a,b){
+          return valueToIndex[a.value] - valueToIndex[b.value];
+        });
+      }
       
       function gen_layer(docId){
         return new google.maps.FusionTablesLayer({
