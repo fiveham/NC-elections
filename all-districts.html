@@ -327,7 +327,7 @@
         
         // Bias the Autocomplete results towards current map's viewport.
         map.addListener('bounds_changed', function() {
-          searchBox.setBounds(map.getBounds());
+          autocomplete.setBounds(map.getBounds());
         });
         
         // Listen for the event fired when the user selects a prediction and place a
