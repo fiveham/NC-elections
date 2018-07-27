@@ -229,12 +229,16 @@
       function get_url_params(){
         var url = window.location.href;
         var q = url.indexOf("?");
+        var h = url.indexOf("#");
+        if(h < 0){
+          h = url.length;
+        }
         var params = (q == -1
             ? []
-            : url.slice(q+1).split("&"));
+            : url.slice(q+1,h).split("&"));
         var param_dict = {};
         for(var i = 0; i < params.length; i++){
-          param = params[i];
+          var param = params[i];
           kv = param.split("=");
           param_dict[kv[0]] = kv[1];
         }
