@@ -238,8 +238,7 @@
             : url.slice(q+1,h).split("&"));
         var param_dict = {};
         for(var i = 0; i < params.length; i++){
-          var param = params[i];
-          kv = param.split("=");
+          var kv = params[i].split("=");
           param_dict[kv[0]] = kv[1];
         }
         return param_dict;
