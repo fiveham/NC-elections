@@ -159,16 +159,16 @@
       var map;
       var marker;
       var icon;
-      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", layer:null, value:"statewide"},
-                  {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB", layer:null, value:"county"},
-                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", layer:null, value:"house"},
-                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", layer:null, value:"senate"},
-                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", layer:null, value:"prosecutorial"},
-                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", layer:null, value:"congress"},
-                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", layer:null, value:"pollingplace"},
-                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", layer:null, value:"precinct"},
-                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", layer:null, value:"district"},
-                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", layer:null, value:"superior"}];
+      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, value:"statewide"},
+                  {docId:"10_Odxkq3aL2rM_5u4uPUyjinuDr_eIzvq3APCVwB", templateId: 2, layer:null, value:"county"},
+                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, value:"house"},
+                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, value:"senate"},
+                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, value:"prosecutorial"},
+                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, value:"congress"},
+                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", templateId: 2, layer:null, value:"pollingplace"},
+                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", templateId: 2, layer:null, value:"precinct"},
+                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, value:"district"},
+                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, value:"superior"}];
       sort_docs();
       
       function sort_docs(){
@@ -182,15 +182,15 @@
         });
       }
       
-      function gen_layer(docId){
+      function gen_layer(doc){
         return new google.maps.FusionTablesLayer({
           query: {
             select: "geometry",
-            from: docId
+            from: doc.docId
           },
           map: map,
           styleId: 2,
-          templateId: 2
+          templateId: doc.templateId
         });
       }
       
@@ -201,7 +201,7 @@
           }
         }
         if(!docs[index].layer){
-          docs[index].layer = gen_layer(docs[index].docId);
+          docs[index].layer = gen_layer(docs[index]);
         }
         docs[index].layer.setMap(map);
       }
