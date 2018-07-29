@@ -73,7 +73,7 @@ This parameter determines the map layer that is displayed when the page loads.
 
 This project should not be trusted as the final word on any of the election information that it presents.  Before taking any action based on that information, you should verify it independently from official sources.
 
-To officially determine which districts you are able to vote in, if you are already registered to vote, [look up your voter registration information](https://vt.ncsbe.gov/RegLkup/) with the state board of elections.  The "Jurisdictions" section lists all the districts that pertain to you, and the "Sample Ballots" section lists any sample ballots that pertain to you, once they become available.
+To officially determine which districts pertain to you as a voter, if you are already registered to vote, [look up your voter registration information](https://vt.ncsbe.gov/RegLkup/) with the state board of elections.  The "Jurisdictions" section lists all the districts that pertain to you, and the "Sample Ballots" section lists any sample ballots that pertain to you, once they become available.
 
 If you are not registered to vote, you can officially determine which precinct and polling place pertain to you by [looking up your Precinct and Polling Place](https://vt.ncsbe.gov/PPLkup) according to your address.  Polling place lookup results include sample ballots once those are available, which can officially tell you who's running for what.
 
