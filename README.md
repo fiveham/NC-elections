@@ -63,13 +63,11 @@ This parameter determines the map layer that is displayed when the page loads.
 
 #### lat, lng
 
-`lat` and `lng` can `=` any latitude and longitude, respectively and determine the initial latitude and longitude where the map is centered when the page loads.
+`lat` and `lng` can `=` any latitude and longitude respectively and determine the initial latitude and longitude where the map is centered when the page loads.
 
 #### zoom
 
 `zoom` can `=` any integer number from 0 to 22 and determines the initial zoom level when the page loads.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 ## Warning
 
