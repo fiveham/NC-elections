@@ -26,12 +26,12 @@ Choose a layer from the dropdown menu labeled "Choose Map" on the left.
 ### Features
 
 * Maps for every\* district type
-    * Learn of offices you didn't know existed!
+    * Learn of offices you maybe didn't know existed!
     * \*Except Soil and Water Conservation districts, whose supervisors are elected per county
 * Address search bar
     * Jump to an address and check who's running for what offices around there
 * URL parameters
-    * Link someone to a specific location and zoom level on the map and even choose which layer!
+    * Link to a specific location and zoom level on the map and even choose which layer!
     * Details below
 * Geolocator button
     * Jump to your location and explore the districts around you
