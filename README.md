@@ -1,5 +1,7 @@
 # NC Midterm Election 2018
 
+![The map, including the address lookup field, geolocator button, and layer-selection dropdown](./images/map-example.png "The map, including the address lookup field, geolocator button, and layer-selection dropdown")
+
 This project is intended to help people in North Carolina learn about the election this November 6th by presenting the districts according to which the positions up for election are elected as an interactive map and by displaying the name of the district, the candidates up for election for the office or offices pertaining to that district as well as those candidates' party affiliations on the ballot, and other important information in a popup balloon when a user clicks or taps a district.
 
 By presenting this information in an interactive visual manner, I hope that people can become more engaged with politics, as they will be able to observe the boundaries of the districts and determine which districts they live in, which electoral precinct they live in, and even their polling place without having to go out of their way to ask each question.  You don't have to ask "Which Superior Court district do I live in?" or "Is my least favorite barbershop inside the same state senate district as my home?" (not that anyone would ever think to ask that sort thing), and instead you can simply explore the district maps and learn whatever information interests you.
