@@ -31,7 +31,7 @@ Choose a layer from the dropdown menu labeled "Choose Map" on the left.
 * Address search bar
     * Jump to an address and check who's running for what offices around there
 * URL parameters
-    * Link to a specific location and zoom level on the map and even choose which layer!
+    * Link to a [specific location and zoom level](https://fiveham.github.io/NC-elections/all-districts?lat=36.396753&lng=-79.862120&layer=senate&zoom=10) on the map and even choose which layer!
     * (details below)
 * Geolocator button
     * Jump to your location and explore the districts around you
