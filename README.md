@@ -4,7 +4,7 @@ This project is intended to help people in North Carolina learn about the electi
 
 By presenting this information in an interactive visual manner, I hope that people can become more engaged with politics, as they will be able to observe the boundaries of the districts and determine which districts they live in, which electoral precinct they live in, and even their polling place without having to go out of their way to ask each question.  You don't have to ask "Which Superior Court district do I live in?" or "Is my least favorite barbershop inside the same state senate district as my home?" (not that anyone would ever think to ask that sort thing), and instead you can simply explore the district maps and learn whatever information interests you.
 
-The interactive map can be found here: https://fiveham.github.io/NC-elections/all-districts
+The interactive map can be found here: [https://fiveham.github.io/NC-elections/all-districts](https://fiveham.github.io/NC-elections/all-districts)
 
 ## About the Map
 
