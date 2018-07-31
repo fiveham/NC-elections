@@ -138,7 +138,8 @@
       
       .installed-controls{
         position: absolute;
-        display: none;
+        opacity: 0;
+        transition: opacity 1s ease-in;
         margin: 10px 5px;
       }
       
@@ -299,9 +300,9 @@
       }
       
       function show_extras(){
-        document.getElementById("layer-select").style.display = "block";
-        document.getElementById("pac-input").style.display = "block";
-        document.getElementById("geolocation").style.display = "block";
+        document.getElementById("layer-select").style.opacity = "1";
+        document.getElementById("pac-input").style.opacity = "1";
+        document.getElementById("geolocation").style.opacity = "1";
       }
       
       function establishIcon(){
