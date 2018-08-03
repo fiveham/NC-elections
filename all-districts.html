@@ -475,6 +475,36 @@
         marker = newMarker;
       }
       
+      function getBounds(url_params){
+        if(!("bounds" in url_params)){
+          return null;
+        }
+        var val = url_params["bounds"];
+        
+        var bounds = {
+          east: null,
+          west: null,
+          north: null,
+          south: null
+        };
+        
+        for(var key in bounds){
+          var k = key.slice(0,2);
+          var o = val.indexOf(k);
+          if(o < 0){
+            return null;
+          }
+          var sl = val.slice(o + k.length);
+          var oriented = parseFloat(sl);
+          if(isNaN(oriented)){
+            return null;
+          }
+          bounds[key] = oriented;
+        }
+        
+        return bounds;
+      }
+      
       function initAutocomplete() {
         var url_params = get_url_params();
         map = gen_map(url_params);
@@ -508,6 +538,12 @@
             function(){
               replaceMarker(go_to_place(autocomplete.getPlace()));
             });
+        
+        //fit bounds if specified
+        var bounds = getBounds(url_params);
+        if(bounds){
+          map.fitBounds(bounds);
+        }
         
         //turn on the initial map layers
         var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
