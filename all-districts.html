@@ -127,9 +127,12 @@
         cursor: pointer;
       }
       
-      .layer-header{
-        text-align: center;
+      .layer-header-weight{
         font-weight: bold;
+      }
+      
+      .layer-header-align{
+        text-align: center;
       }
       
       .unpad {
@@ -161,11 +164,11 @@
       <img src="./images/icon-157354_640.png" height="23" width="13">
     </div>
     <div id="layer-select" class="installed-controls">
-      <div class="layer-header" class="unpad">
+      <div class="layer-header-weight layer-header-align unpad">
         Choose Map
       </div>
       <p>
-        <select id="layer-dropdown" onchange="select_layer();">
+        <select id="layer-dropdown" onchange="updateLayers();">
           <option value="house"        >State House</option>
           <option value="senate"       >State Senate</option>
           <option value="statewide"    >Statewide</option>
@@ -175,8 +178,10 @@
           <option value="superior"     >Superior Court</option>
           <option value="district"     >District Court</option>
           <option value="precinct"     >Voting Precincts</option>
-          <option value="pollingplace" >Polling Places</option>
         </select>
+      </p>
+      <p class="layer-header-weight">
+        <input type="checkbox" id="toggle-polling-places" onchange="updateLayers();"><label for="toggle-polling-places">Polling Places</label>
       </p>
     </div>
     <div id="map"></div>
@@ -184,16 +189,16 @@
       var map;
       var marker;
       var icon;
-      var docs = [{docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, value:"statewide"},
-                  {docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, value:"county"},
-                  {docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, value:"house"},
+      var docs = [{docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, value:"house"},
                   {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, value:"senate"},
+                  {docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, value:"statewide"},
                   {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, value:"prosecutorial"},
                   {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, value:"congress"},
-                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", templateId: 2, layer:null, value:"pollingplace"},
-                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", templateId: 2, layer:null, value:"precinct"},
+                  {docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, value:"county"},
+                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, value:"superior"},
                   {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, value:"district"},
-                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, value:"superior"}];
+                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", templateId: 2, layer:null, value:"precinct"},
+                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", templateId: 2, layer:null, value:"pollingplace"}];
       sort_docs();
       
       function sort_docs(){
@@ -203,7 +208,15 @@
           valueToIndex[options.item(i).value] = i;
         }
         docs.sort(function(a,b){
-          return valueToIndex[a.value] - valueToIndex[b.value];
+          var ai = valueToIndex[a.value];
+          if(isNaN(ai)){
+            ai = docs.length;
+          }
+          var bi = valueToIndex[b.value];
+          if(isNaN(bi)){
+            bi = docs.length;
+          }
+          return ai - bi;
         });
       }
       
@@ -219,22 +232,51 @@
         });
       }
       
-      function show_layer(index){
-        for(var i = 0; i < docs.length; i++){
-          if(docs[i].layer){
-            docs[i].layer.setMap(null);
+      var pollingPlaceDoc;
+      
+      function getPollingPlaceDoc(){
+        if(!pollingPlaceDoc){
+          for(var i = docs.length-1; i >= 0; i--){
+            if(docs[i].value == "pollingplace"){
+              pollingPlaceDoc = docs[i];
+              break;
+            }
           }
         }
-        if(!docs[index].layer){
-          docs[index].layer = gen_layer(docs[index]);
-        }
-        docs[index].layer.setMap(map);
+        return pollingPlaceDoc;
       }
       
-      function select_layer(){
-        var menu = document.getElementById("layer-dropdown");
-        var value = menu.selectedIndex;
-        show_layer(value);
+      function hookUpMap(doc){
+        if(!doc.layer){
+          doc.layer = gen_layer(doc);
+        }
+        doc.layer.setMap(map);
+      }
+      
+      function unhookMap(doc){
+        if(doc.layer){
+          doc.layer.setMap(null);
+        }
+      }
+      
+      function clearLayers(){
+        for(var i = 0; i < docs.length; i++){
+          unhookMap(docs[i]);
+        }
+      }
+      
+      function rebuildLayers(){
+        var index = document.getElementById("layer-dropdown").selectedIndex;
+        var doc = docs[index];
+        hookUpMap(doc);
+        if(document.getElementById("toggle-polling-places").checked){
+          hookUpMap(getPollingPlaceDoc());
+        }
+      }
+      
+      function updateLayers(){
+        clearLayers();
+        rebuildLayers();
       }
       
       function careful_extract(params, key, func, min, max, def){
@@ -270,6 +312,10 @@
         return isNaN(parsed) ? find_layer(text) : parsed;
       }
       
+      function ppState(val){
+        return 1;
+      }
+      
       function get_url_params(){
         var url = window.location.href;
         var q = url.indexOf("?");
@@ -283,7 +329,7 @@
         var param_dict = {};
         for(var i = 0; i < params.length; i++){
           var kv = params[i].split("=");
-          param_dict[kv[0]] = kv[1];
+          param_dict[kv[0]] = kv[1] ? kv[1] : null;
         }
         return param_dict;
       }
@@ -388,11 +434,12 @@
               replaceMarker(go_to_place(autocomplete.getPlace()));
             });
         
-        var layer = careful_extract(url_params, "layer", index_layer, 0, 9, 0);
-        show_layer(layer);
-        if(layer != 0){ //By default the 0 layer is turned on
-          document.getElementById("layer-dropdown").selectedIndex = layer;
-        }
+        //turn on the initial map layers
+        var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
+        document.getElementById("layer-dropdown").selectedIndex = layer;
+        var ppToggle = careful_extract(url_params, "pp", ppState, 1, 1, 0);
+        document.getElementById("toggle-polling-places").checked = !!ppToggle;
+        updateLayers();
       }
       
       function geolocate() {
