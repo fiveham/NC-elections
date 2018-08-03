@@ -1,6 +1,6 @@
 # NC Midterm Election 2018
 
-![The map, including the address lookup field, geolocator button, and layer-selection dropdown](./images/map-example.png "The map, including the address lookup field, geolocator button, and layer-selection dropdown")
+![The map, including the address lookup field, geolocator button, and layer-selection menu](./images/hook-district.png "The map, including the address lookup field, geolocator button, and layer-selection menu")
 
 This project is intended to help people in North Carolina learn about the election this November 6th by presenting the districts according to which the positions up for election are elected as an interactive map and by displaying the name of the district, the candidates up for election for the office or offices pertaining to that district as well as those candidates' party affiliations on the ballot, and other important information in a popup balloon when a user clicks or taps a district.
 
@@ -17,7 +17,7 @@ The map includes layers for
 * Statewide offices/issues
 * Prosecutorial districts (as in "district attorney")
 * Congressional districts (US House)
-* Counties (local offices not available countywide are included)
+* Counties (local offices not elected countywide are included)
 * Superior Court districts
 * District Court districts
 * Precincts
@@ -37,14 +37,16 @@ Choose a layer from the dropdown menu labeled "Choose Map" on the left.
     * (details below)
 * Geolocator button
     * Jump to your location and explore the districts around you
+* Toggleable Polling Place overlay
 
 ### URL Parameters
 
-Four parameters are supported:
+Five parameters are supported:
 * layer
 * lat
 * lng
 * zoom
+* pp
  
 #### layer
 
@@ -59,7 +61,6 @@ Four parameters are supported:
 * `superior`
 * `district`
 * `precinct`
-* `pollingplace`
 
 This parameter determines the map layer that is displayed when the page loads.
 
@@ -70,6 +71,10 @@ This parameter determines the map layer that is displayed when the page loads.
 #### zoom
 
 `zoom` can `=` any integer number from 0 to 22 and determines the initial zoom level when the page loads.
+
+#### pp
+
+`pp` does not need to `=` anything. Its mere presence in the url causes the Polling Place layer to display automatically when the page loads.
 
 ## Warning
 
