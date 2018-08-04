@@ -41,12 +41,13 @@ Choose a layer from the dropdown menu labeled "Choose Map" on the left.
 
 ### URL Parameters
 
-Five parameters are supported:
+Six parameters are supported:
 * layer
 * lat
 * lng
 * zoom
 * pp
+* bounds
  
 #### layer
 
@@ -75,6 +76,12 @@ This parameter determines the map layer that is displayed when the page loads.
 #### pp
 
 `pp` does not need to `=` anything. Its mere presence in the url causes the Polling Place layer to display automatically when the page loads.
+
+#### bounds
+
+`bounds` can `=` a string that looks like this: `ea-79.3378we-80.00401no34.70315so34.0367` made of four boundary terms all squished together in any order. Each boundary term is the first two letters of the boundary's cardinal direction followed by the latitude or longitude of that boundary in degrees.
+
+If `bounds` is specified, then when the map loads it will fit itself to the specified box.  If a center `lat` and `lng` and/or a `zoom` value have also been specified, then they are ignored.
 
 ## Warning
 
