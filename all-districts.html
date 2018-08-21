@@ -563,36 +563,36 @@
         }
         marker = newMarker;
       }
-	  
-	  function getBounds(url_params){
-	    if(!("bounds" in url_params)){
-		  return null;
-		}
-		var val = url_params["bounds"];
-		
-		var bounds = {
-		  east: null, 
-		  west: null,
-		  north: null,
-		  south: null
-		};
-		
-		for(var key in bounds){
-		  var k = key.slice(0,2);
-		  var o = val.indexOf(k);
-		  if(o < 0){
-		    return null;
-	      }
-		  var sl = val.slice(o + k.length);
-		  var oriented = parseFloat(sl);
-		  if(isNaN(oriented)){
-		    return null;
-		  }
-		  bounds[key] = oriented;
-		}
-		
-		return bounds;
-	  }
+	    
+	    function getBounds(url_params){
+	      if(!("bounds" in url_params)){
+		      return null;
+		    }
+		    var val = url_params["bounds"];
+		    
+		    var bounds = {
+		      east:  null, 
+		      west:  null,
+		      north: null,
+		      south: null
+		    };
+		    
+		    for(var key in bounds){
+		      var k = key.slice(0,2);
+		      var o = val.indexOf(k);
+		      if(o < 0){
+		        return null;
+	        }
+		      var sl = val.slice(o + k.length);
+		      var oriented = parseFloat(sl);
+		      if(isNaN(oriented)){
+		        return null;
+		      }
+		      bounds[key] = oriented;
+		    }
+		    
+		    return bounds;
+	    }
       
       function initAutocomplete() {
         var url_params = get_url_params();
@@ -615,10 +615,10 @@
         //Move the layer-select box to the center left
         var layer_select = document.getElementById("layer-select");
         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(layer_select);
-		
-		//Move the sharing-box div to the center
-		var sharebox = document.getElementById("modal");
-		map.controls[google.maps.ControlPosition.CENTER].push(sharebox);
+		    
+		    //Move the sharing-box div to the center
+		    var sharebox = document.getElementById("modal");
+		    map.controls[google.maps.ControlPosition.CENTER].push(sharebox);
         
         // Bias the Autocomplete results towards current map's viewport.
         map.addListener('bounds_changed', function() {
@@ -627,16 +627,15 @@
         
         // Listen for the event fired when the user selects a prediction and place a
         // marker on the map for that place.
-        autocomplete.addListener('place_changed', 
-            function(){
-              replaceMarker(go_to_place(autocomplete.getPlace()));
-            });
-			
-		//fit bounds if specified
-		var bounds = getBounds(url_params);
-		if(bounds){
-		  map.fitBounds(bounds);
-		}
+        autocomplete.addListener('place_changed', function(){
+          replaceMarker(go_to_place(autocomplete.getPlace()));
+        });
+        
+        //fit bounds if specified
+        var bounds = getBounds(url_params);
+        if(bounds){
+          map.fitBounds(bounds);
+        }
         
         //turn on the initial map layers
         var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
@@ -662,23 +661,45 @@
           });
         }
       }
-	  
-	  function on(){
-	    var url = location.href;
-		var q = url.indexOf("?");
-		if(q < 0){
-		  q = url.length;
-		}
-		url = url.slice(0,q);
+      
+      function on(){
+        var url = location.href;
+        var q = url.indexOf("?");
+        if(q < 0){
+          q = url.length;
+        }
+        url = url.slice(0,q);
+        
+        var center = map.getCenter().toJSON();
+        var zoom = map.getZoom();
 		
-	    var center = map.getCenter().toJSON();
-		var zoom = map.getZoom();
-		
-		url += "?zoom=" + zoom;
-		url += "&lat=" + center.lat;
-		url += "&lng=" + center.lng;
-		
-		document.getElementById("sharing-url").value = url;
+        url += "?zoom=" + zoom;
+        url += "&lat=" + center.lat;
+        url += "&lng=" + center.lng;
+        
+        var active_docs = [];
+        for(var i = 0; i < docs.length; i++){
+          if(docs[i].layer && docs[i].layer.getMap()){
+            active_docs.push(docs[i]);
+          }
+        }
+        
+        if(active_docs.length > 1){
+          second = active_docs[1];
+          url += "&pp";
+        }
+        
+        var first = active_docs[0];
+        var second = null;
+        
+        if(first.value == "pollingplace"){
+          var swap = first;
+          first = second;
+          second = swap;
+        }
+        url += "&layer=" + first.value;
+        
+        document.getElementById("sharing-url").value = url;
         document.getElementById("modal").style.visibility = "visible";
       }
 	  
