@@ -287,10 +287,11 @@
           }
         }
       }
-	  
-	  .sharing-url{
-	    width: 100%;
-	  }
+      
+      .sharing-url{
+        width: 100%;
+        margin-bottom: 5px;
+      }
     </style>
   </head>
   <body>
@@ -343,6 +344,9 @@
 		    <label for="sharing-url">Link to this map with the current center, zoom, and layers</label>
 		  </p>
 		  <input id="sharing-url" type="text" readonly class="sharing-url" onClick="this.setSelectionRange(0, this.value.length)">
+		  <div class="layer-header-weight layer-header-align sharing-click" id="copier" title="Copy link to clipboard" onclick="copy_sharing_url();">
+		    Copy to clipboard
+		  </div>
 		</div>
 	</div>
 	
@@ -705,6 +709,11 @@
 	  
       function off(){
         document.getElementById("modal").style.visibility = "hidden";
+      }
+      
+      function copy_sharing_url(){
+        document.getElementById("sharing-url").select();
+        document.execCommand("copy");
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQzE_F2ZqhXc_tIW4sfBOJBOsAKITo2JA&libraries=places&callback=initAutocomplete"
