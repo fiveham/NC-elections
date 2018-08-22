@@ -94,11 +94,11 @@
         min-width: 110px;
         max-width: 400px;
         width: 400px;
-		width: -webkit-calc(100% - 314px);
-		width: -moz-calc(100% - 314px);
-		width: -o-calc(100% - 314px);
-		width: expression(100% - 314px);
-		width: calc(100% - 314px);
+        width: -webkit-calc(100% - 314px);
+        width: -moz-calc(100% - 314px);
+        width: -o-calc(100% - 314px);
+        width: expression(100% - 314px);
+        width: calc(100% - 314px);
       }
       
       #pac-input:focus {
@@ -569,36 +569,36 @@
         }
         marker = newMarker;
       }
-	    
-	    function getBounds(url_params){
-	      if(!("bounds" in url_params)){
-		      return null;
-		    }
-		    var val = url_params["bounds"];
-		    
-		    var bounds = {
-		      east:  null, 
-		      west:  null,
-		      north: null,
-		      south: null
-		    };
-		    
-		    for(var key in bounds){
-		      var k = key.slice(0,2);
-		      var o = val.indexOf(k);
-		      if(o < 0){
-		        return null;
-	        }
-		      var sl = val.slice(o + k.length);
-		      var oriented = parseFloat(sl);
-		      if(isNaN(oriented)){
-		        return null;
-		      }
-		      bounds[key] = oriented;
-		    }
-		    
-		    return bounds;
-	    }
+      
+      function getBounds(url_params){
+        if(!("bounds" in url_params)){
+          return null;
+        }
+        var val = url_params["bounds"];
+        
+        var bounds = {
+          east:  null, 
+          west:  null,
+          north: null,
+          south: null
+        };
+        
+        for(var key in bounds){
+          var k = key.slice(0,2);
+          var o = val.indexOf(k);
+          if(o < 0){
+            return null;
+          }
+          var sl = val.slice(o + k.length);
+          var oriented = parseFloat(sl);
+          if(isNaN(oriented)){
+            return null;
+          }
+          bounds[key] = oriented;
+        }
+        
+        return bounds;
+      }
       
       function initAutocomplete() {
         var url_params = get_url_params();
@@ -621,10 +621,10 @@
         //Move the layer-select box to the center left
         var layer_select = document.getElementById("layer-select");
         map.controls[google.maps.ControlPosition.LEFT_CENTER].push(layer_select);
-		    
-		    //Move the sharing-box div to the center
-		    var sharebox = document.getElementById("modal");
-		    map.controls[google.maps.ControlPosition.CENTER].push(sharebox);
+        
+        //Move the sharing-box div to the center
+        var sharebox = document.getElementById("modal");
+        map.controls[google.maps.ControlPosition.CENTER].push(sharebox);
         
         // Bias the Autocomplete results towards current map's viewport.
         map.addListener('bounds_changed', function() {
@@ -678,7 +678,7 @@
         
         var center = map.getCenter().toJSON();
         var zoom = map.getZoom();
-		
+        
         url += "?zoom=" + zoom;
         url += "&lat=" + center.lat;
         url += "&lng=" + center.lng;
@@ -708,7 +708,7 @@
         document.getElementById("sharing-url").value = url;
         document.getElementById("modal").style.visibility = "visible";
       }
-	  
+      
       function off(){
         document.getElementById("modal").style.visibility = "hidden";
       }
