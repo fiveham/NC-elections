@@ -150,14 +150,14 @@
         opacity: 0;
         transition: opacity 1s ease-in;
       }
-	  
-	  .top-control{
-	    margin: 10px 10px 0 0;
-	  }
-	  
-	  .left-control{
-	    margin: 0 0 0 10px;
-	  }
+      
+      .top-control{
+        margin: 10px 10px 0 0;
+      }
+      
+      .left-control{
+        margin: 0 0 0 10px;
+      }
       
       .geolocate{
         display: block;
@@ -166,127 +166,133 @@
         background-color: #fff;
         text-align: center;
         cursor: pointer;
-		border-radius: 2px;
-		box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-		overflow: hidden;
+        border-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+        overflow: hidden;
       }
       
       .geolocate:hover{
-	    background-color: #ebebeb;
-	  }
+        background-color: #ebebeb;
+      }
       
+      .modal{
+        visibility: hidden;
+        position: absolute;
+        width: 300px;
+        max-width: 95%;
+        max-height: 95%;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #a9a9a9;
+      }
+      
+      .closer{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        cursor: pointer;
+      }
+      
+      .sharing-click{
+        cursor: pointer;
+        height: 19px;
+        line-height: 19px;
+        border-radius: 2px;
+      }
+      
+      .sharing-click:hover{
+        background-color: #ebebeb;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+      }
+      
+      /*Begin popup balloon dimensional controls*/
+      
+      /*Specify static fallbacks in case of lack of support for calc functions.
+        Allow a constant buffer size to fit the controls around the edges.*/
       div.googft-info-window{
         max-height: 300px;
+        max-height: -webkit-calc(100vh - 150px);
+        max-height:   expression(100vh - 150px);
+        max-height:    -moz-calc(100vh - 150px);
+        max-height:      -o-calc(100vh - 150px);
+        max-height:         calc(100vh - 150px);
         max-width: 400px;
-      }
-	  
-	  .modal{
-		visibility: hidden;
-		position: absolute;
-		width: 300px;
-		max-width: 95%;
-		max-height: 95%;
-		background-color: white;
-		padding: 10px;
-        border: 1px solid #a9a9a9;
-	  }
-	  
-	  .closer{
-		position: absolute;
-		top: 0px;
-		right: 0px;
-        cursor: pointer;
-	  }
-	  
-	  .sharing-click{
-	    cursor: pointer;
-		height: 19px;
-		line-height: 19px;
-		border-radius: 2px;
-	  }
-	  
-	  .sharing-click:hover{
-		background-color: #ebebeb;
-		box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-	  }
-      
-      .tall-balloon{
-		height: -webkit-calc(100vh - 150px);
-		height:    -moz-calc(100vh - 150px);
-		height:      -o-calc(100vh - 150px);
-		height:   expression(100vh - 150px);
-        height:         calc(100vh - 150px);
+        max-width: -webkit-calc(100vw - 300px);
+        max-width:   expression(100vw - 300px);
+        max-width:    -moz-calc(100vw - 300px);
+        max-width:      -o-calc(100vw - 300px);
+        max-width:         calc(100vw - 300px);
       }
       
-      .wide-balloon{
-		width: -webkit-calc(100vw - 300px);
-		width:    -moz-calc(100vw - 300px);
-		width:      -o-calc(100vw - 300px);
-		width:   expression(100vw - 300px);
-        width:         calc(100vw - 300px);
+      /*Reduce balloon dimensions to the fallback
+        values when the screen is too large.*/
+      @media only screen and (min-width: 800px){
+        div.googft-info-window {
+          max-width: 400px;
+        }
       }
-	  
+      @media only screen and (min-height: 500px){
+        div.googft-info-window {
+          max-height: 300px;
+        }
+      }
+      
       /*Crude tool to target mobile Safari to work
-      around its lack of support for the calc() function
-	  and the vh and vw units.*/
+        around its lack of support for the calc() function
+        and the vh and vw units.*/
       @supports (-webkit-overflow-scrolling: touch) {
         @media only screen and (orientation: landscape){
-          @media only screen and (min-device-width: 320) 
-          and (max-device-width: 568){
+          @media only screen and (min-device-width: 320px) and (max-device-width: 568px){
             div.googft-info-window{
-              height: 170px;
-              width: 268px;
+              max-height: 170px;
+              max-width: 268px;
             }
           }
           
-          @media only screen and (min-device-width: 320) 
-          and (max-device-width: 480){
+          @media only screen and (min-device-width: 320px) and (max-device-width: 480px){
             div.googft-info-window{
-              height: 170px;
-              width: 200px;
+              max-height: 170px;
+              max-width: 200px;
             }
           }
           
-          @media only screen and (min-device-width: 375) 
-          and (max-device-width: 812){
+          @media only screen and (min-device-width: 375px) and (max-device-width: 812px){
             div.googft-info-window{
-              height: 225px;
-              width: 400px;
+              max-height: 225px;
+              max-width: 400px;
             }
           }
           
-          @media only screen and (min-device-width: 375) 
-          and (max-device-width: 667){
+          @media only screen and (min-device-width: 375px) and (max-device-width: 667px){
             div.googft-info-window{
-              height: 225px;
-              width: 367px;
+              max-height: 225px;
+              max-width: 367px;
             }
           }
           
-          @media only screen and (min-device-width: 414) 
-          and (max-device-width: 736){
+          @media only screen and (min-device-width: 414px) and (max-device-width: 736px){
             div.googft-info-window{
-              height: 264px;
-              width: 400px;
+              max-height: 264px;
+              max-width: 400px;
             }
           }
         }
         
         @media only screen and (orientation: portrait){
           div.googft-info-window{
-            height: 300px;
-            width: 200px;
+            max-height: 300px;
+            max-width: 200px;
           }
         }
         
-        @media only screen and (min-device-width : 768px) 
-        and (max-device-width : 1024px){
+        @media only screen and (min-device-width : 768px) and (max-device-width : 1024px){
           div.googft-info-window{
-            height: 300px;
-            width: 400px;
+            max-height: 300px;
+            max-width: 400px;
           }
         }
       }
+      /*End popup balloon dimensional controls*/
       
       .sharing-url{
         width: 100%;
