@@ -24,8 +24,20 @@
       (last retrieved July 27, 2018).
     -->
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta property="og:image" content="http://fiveham.github.io/NC-elections/images/thumbnail-county.png" />
     <meta charset="utf-8">
+    <meta property="og:image" content="http://fiveham.github.io/NC-elections/images/thumbnail-county.png" />
+    <meta property="og:image:alt" content="A screenshot of this interactive map of North Carolina, with the county layer turned on and no polling places" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:url" content="http://fiveham.github.io/NC-elections/images/thumbnail-county.png" />
+    <meta property="og:image:secure_url" content="https://fiveham.github.io/NC-elections/images/thumbnail-county.png" />
+    <meta property="og:image:width" content="856" />
+    <meta property="og:image:height" content="773" />
+    <meta property="og:url" content="https://fiveham.github.io/NC-elections/all-districts" />
+    <meta property="og:type" content="website" />
+    <meta property="og:determiner" content="" />
+    <meta property="og:title" content="NC Midterms 2018" />
+    <meta property="og:description" content="Interactive map of polling places, districts, and candidates for the 2018 midterm election November 6th" />
+    
     <title>NC Midterms 2018</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
@@ -203,8 +215,8 @@
       
       /*Begin popup balloon dimensional controls*/
       
-      /*Specify static fallbacks in case of lack of support for calc functions.
-        Allow a constant buffer size to fit the controls around the edges.*/
+      /* Specify static fallbacks in case of lack of support for calc functions.
+       * Allow a constant buffer size to fit the controls around the edges. */
       div.googft-info-window{
         max-height: 300px;
         max-height: -webkit-calc(100vh - 150px);
@@ -220,8 +232,8 @@
         max-width:         calc(100vw - 300px);
       }
       
-      /*Reduce balloon dimensions to the fallback
-        values when the screen is too large.*/
+      /* Reduce balloon dimensions to the fallback
+       * values when the screen is too large. */
       @media only screen and (min-width: 800px){
         div.googft-info-window {
           max-width: 400px;
@@ -233,9 +245,9 @@
         }
       }
       
-      /*Crude tool to target mobile Safari to work
-        around its lack of support for the calc() function
-        and the vh and vw units.*/
+      /* Crude tool to target mobile Safari to work
+       * around its lack of support for the calc() function
+       * and the vh and vw units. */
       @supports (-webkit-overflow-scrolling: touch) {
         @media only screen and (orientation: landscape){
           @media only screen and (min-device-width: 320px) and (max-device-width: 568px){
@@ -288,7 +300,7 @@
           }
         }
       }
-      /*End popup balloon dimensional controls*/
+      /* End popup balloon dimensional controls */
       
       .sharing-url{
         width: 100%;
