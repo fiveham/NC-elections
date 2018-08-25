@@ -30,14 +30,16 @@ Choose a layer from the dropdown menu labeled "Choose Map" on the left.
 * Maps for every\* district type
     * Learn of offices you maybe didn't know existed!
     * \*Except Soil and Water Conservation districts, whose supervisors are elected per county
-* Address search bar
-    * Jump to an address and check who's running for what offices around there
+* Map view sharing
+    * Link to the map so it shows the same view and layers you that were shown when you copied the sharing URL
 * URL parameters
     * Link to a [specific location and zoom level](https://fiveham.github.io/NC-elections/all-districts?lat=36.396753&lng=-79.862120&layer=senate&zoom=10) on the map and even choose which layer!
     * (details below)
 * Geolocator button
     * Jump to your location and explore the districts around you
 * Toggleable Polling Place overlay
+* Address search bar
+    * Jump to an address and check who's running for what offices around there
 
 ### URL Parameters
 
