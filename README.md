@@ -1,6 +1,6 @@
 # NC Midterm Election 2018
 
-![The map, including the address lookup field, geolocator button, and layer-selection menu](./images/hook-district-update.png "The map, including the address lookup field, geolocator button, and layer-selection menu")
+![The map, including the address lookup field, geolocator button, and layer-selection menu](./images/hook-district-newui.png "The map, including the address lookup field, geolocator button, and layer-selection menu")
 
 This project is intended to help people in North Carolina learn about the election this November 6th by presenting the districts according to which the positions up for election are elected as an interactive map and by displaying the name of the district, the candidates up for election for the office or offices pertaining to that district as well as those candidates' party affiliations on the ballot, and other important information in a popup balloon when a user clicks or taps a district.
 
