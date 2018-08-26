@@ -99,9 +99,9 @@
       #pac-input {
         background-color: #fff;
         font-family: Roboto;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 300;
-        padding: 0 5px;
+        padding: 6px 5px;
         text-overflow: ellipsis;
         min-width: 110px;
         width: 400px;
@@ -140,15 +140,15 @@
         border: 1px solid #a9a9a9;
       }
       
-      #layer-dropdown{
+      .layer-dropdown{
         cursor: pointer;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        font-size: 14px;
       }
       
-      .layer-header-weight{
+      .layer-header{
         font-weight: bold;
-      }
-      
-      .layer-header-align{
         text-align: center;
       }
       
@@ -202,8 +202,9 @@
       
       .sharing-click{
         cursor: pointer;
-        height: 19px;
-        line-height: 19px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
         border-radius: 2px;
         background-color: #f0f0f0;
       }
@@ -213,7 +214,7 @@
         box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
       }
       
-      /*Begin popup balloon dimensional controls*/
+      /* Begin popup balloon dimensional controls */
       
       /* Specify static fallbacks in case of lack of support for calc functions.
        * Allow a constant buffer size to fit the controls around the edges. */
@@ -316,6 +317,22 @@
         user-select:           none; /* Non-prefixed version, currently
                                         supported by Chrome and Opera */
       }
+      
+      .sharing-body{
+        margin-top: 10px;
+      }
+      
+      .select-label{
+        width: 100%;
+        margin-bottom: 4px;
+      }
+      
+      .hr-bottom{
+        border-bottom: 1px solid #a9a9a9;
+        width: 100%;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+      }
     </style>
   </head>
   <body>
@@ -331,28 +348,37 @@
     
     <!-- Layer-select box -->
     <div id="layer-select" class="installed-controls left-control no-select">
-      <div class="layer-header-weight layer-header-align">
-        Choose Map
-      </div>
-      <p title="Switch to a different set of districts">
-        <select id="layer-dropdown" onchange="updateLayers();">
-          <option value="house"        >State House</option>
-          <option value="senate"       >State Senate</option>
-          <option value="statewide"    >Statewide</option>
-          <option value="prosecutorial">Prosecutorial</option>
-          <option value="congress"     >Congressional</option>
-          <option value="county"       >County</option>
-          <option value="superior"     >Superior Court</option>
-          <option value="district"     >District Court</option>
-          <option value="precinct"     >Voting Precincts</option>
+      <div title="Switch to a different set of districts" class="hr-bottom">
+        <div class="layer-header select-label">
+          <label for="layer-dropdown">
+            District Map
+          </label>
+        </div>
+        <select id="layer-dropdown" class="layer-dropdown" onchange="updateLayers();">
+          <option value="house" title="Show districts for the North Carolina state house of representatives">State House</option>
+          <option value="senate" title="Show districts for the North Carolina state senate">State Senate</option>
+          <option value="statewide" title="Show layer for statewide offices and issues">Statewide</option>
+          <option value="prosecutorial" title="Show districts for District Attorney">Prosecutorial</option>
+          <option value="congress" title="Show districts for the United States House of Representatives">Congressional</option>
+          <option value="county" title="Show counties">County</option>
+          <option value="superior" title="Show districts for North Carolina superior court">Superior Court</option>
+          <option value="district" title="Show districts for North Carolina district court">District Court</option>
+          <option value="precinct" title="Show electoral precincts">Voting Precincts</option>
         </select>
-      </p>
-      <p class="layer-header-weight" title="Toggle polling places">
-        <input type="checkbox" id="toggle-polling-places" onchange="updateLayers();">
-        <label for="toggle-polling-places">Polling Places</label>
-      </p>
-      <hr>
-      <div role="button" class="layer-header-weight layer-header-align sharing-click" id="sharing-click" title="Share map with current center, zoom, and layers" onclick="on();">
+      </div>
+      <div title="Choose a set of polling places" class="hr-bottom">
+        <div class="layer-header select-label">
+          <label for="polling-places-dropdown">
+            Polling Places
+          </label>
+        </div>
+        <select id="polling-places-dropdown" class="layer-dropdown" onchange="updateLayers();" style="width: 100%;">
+          <option value="none" title="Do not show polling places">&lt;None&gt;</option>
+          <option value="regular" title="Show polling places for November 6">Election Day</option>
+          <option value="early" title="Show one-stop absentee polling places (early voting)">Early Voting</option>
+        </select>
+      </div>
+      <div class="layer-header sharing-click" id="sharing-click" title="Share map with current center, zoom, and layers" onclick="on();">
         Share
       </div>
     </div>
@@ -362,13 +388,13 @@
       <div class="closer" onclick="off();" title="close the sharing window">
         <img src="./images/close.png" title="close the sharing window" height="23" width="24">
       </div>
-      <div class="layer-header-weight">Share View</div>
+      <div><b>Share View</b></div>
       <div class="sharing-body">
-        <p>
+        <div>
           <label for="sharing-url">Link to this map with the current center, zoom, and layers</label>
-        </p>
-        <input id="sharing-url" type="text" readonly class="sharing-url" onClick="this.setSelectionRange(0, this.value.length)">
-        <div role="button" class="layer-header-weight layer-header-align sharing-click no-select" id="copier" title="Copy link to clipboard" onclick="copy_sharing_url();">
+          <input id="sharing-url" type="text" readonly class="sharing-url" onClick="this.setSelectionRange(0, this.value.length)">
+        </div>
+        <div class="layer-header sharing-click no-select" id="copier" title="Copy link to clipboard" onclick="copy_sharing_url();">
           Copy to clipboard
         </div>
       </div>
@@ -381,61 +407,29 @@
       var map;
       var marker;
       var icon;
-      var docs = [{docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, value:"house"},
-                  {docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, value:"senate"},
-                  {docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, value:"statewide"},
-                  {docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, value:"prosecutorial"},
-                  {docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, value:"congress"},
-                  {docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, value:"county"},
-                  {docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, value:"superior"},
-                  {docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, value:"district"},
-                  {docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", templateId: 2, layer:null, value:"precinct"},
-                  {docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", templateId: 2, layer:null, value:"pollingplace"}];
-      sort_docs();
+      var docs = [{  docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, select:"geometry",      value:"house"},
+                  {  docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, select:"geometry",      value:"senate"},
+                  {  docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, select:"geometry",      value:"statewide"},
+                  {  docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, select:"geometry",      value:"prosecutorial"},
+                  {  docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, select:"geometry",      value:"congress"},
+                  {  docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry",      value:"county"},
+                  {  docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, select:"geometry",      value:"superior"},
+                  {  docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, select:"geometry",      value:"district"},
+                  {  docId:"1kG21iCm3yjm99LM0YI_sUce0mnZcuPAE2ReYzSPj", templateId: 2, layer:null, select:"geometry",      value:"precinct"}];
       
-      function sort_docs(){
-        var options = document.getElementById("layer-dropdown").options;
-        var valueToIndex = {};
-        for(var i = 0; i < options.length; i++){
-          valueToIndex[options.item(i).value] = i;
-        }
-        docs.sort(function(a,b){
-          var ai = valueToIndex[a.value];
-          if(isNaN(ai)){
-            ai = docs.length;
-          }
-          var bi = valueToIndex[b.value];
-          if(isNaN(bi)){
-            bi = docs.length;
-          }
-          return ai - bi;
-        });
-      }
+      var ppDocs = [{docId:"1JzyWdEF1e8sgnW5yztTZVPdtHzactexh7vDJ_yp7", templateId: 2, layer:null, select:"geometry",      value:"pollingplace"}, 
+                    {docId:"1q5ryj9ebES6-zxp0WGYFgvx58TRd1-swPjbzl-VE", templateId: 2, layer:null, select:"col4\x3e\x3e0", value:"early"}];
       
       function gen_layer(doc){
         return new google.maps.FusionTablesLayer({
           query: {
-            select: "geometry",
+            select: doc.select,
             from: doc.docId
           },
           map: map,
           styleId: 2,
           templateId: doc.templateId
         });
-      }
-      
-      var pollingPlaceDoc;
-      
-      function getPollingPlaceDoc(){
-        if(!pollingPlaceDoc){
-          for(var i = docs.length-1; i >= 0; i--){
-            if(docs[i].value == "pollingplace"){
-              pollingPlaceDoc = docs[i];
-              break;
-            }
-          }
-        }
-        return pollingPlaceDoc;
       }
       
       function hookUpMap(doc){
@@ -455,14 +449,20 @@
         for(var i = 0; i < docs.length; i++){
           unhookMap(docs[i]);
         }
+        for(var i = 0; i < ppDocs.length; i++){
+          unhookMap(ppDocs[i]);
+        }
       }
       
       function rebuildLayers(){
         var index = document.getElementById("layer-dropdown").selectedIndex;
         var doc = docs[index];
         hookUpMap(doc);
-        if(document.getElementById("toggle-polling-places").checked){
-          hookUpMap(getPollingPlaceDoc());
+        
+        var ppIndex = document.getElementById("polling-places-dropdown").selectedIndex;
+        if(ppIndex > 0){
+          var ppDoc = ppDocs[ppIndex - 1];
+          hookUpMap(ppDoc);
         }
       }
       
@@ -502,10 +502,6 @@
       function index_layer(text){
         var parsed = parseInt10(text);
         return isNaN(parsed) ? find_layer(text) : parsed;
-      }
-      
-      function ppState(val){
-        return 1;
       }
       
       function get_url_params(){
@@ -622,6 +618,10 @@
         return bounds;
       }
       
+      function check_early(param){
+        return param == "early" ? 2 : 1;
+      }
+      
       function initAutocomplete() {
         var url_params = get_url_params();
         map = gen_map(url_params);
@@ -668,8 +668,8 @@
         //turn on the initial map layers
         var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
         document.getElementById("layer-dropdown").selectedIndex = layer;
-        var ppToggle = careful_extract(url_params, "pp", ppState, 1, 1, 0);
-        document.getElementById("toggle-polling-places").checked = !!ppToggle;
+        var ppLayer = careful_extract(url_params, "pp", check_early, 0, 2, 0);
+        document.getElementById("polling-places-dropdown").selectedIndex = ppLayer;
         updateLayers();
       }
       
@@ -690,7 +690,7 @@
         }
       }
       
-      function on(){
+      function gen_sharing_url(){
         var url = location.href;
         var q = url.indexOf("?");
         if(q < 0){
@@ -699,33 +699,37 @@
         url = url.slice(0,q);
         
         var center = map.getCenter().toJSON();
-        var zoom = map.getZoom();
-        
-        url += "?zoom=" + zoom;
-        url += "&lat=" + center.lat;
+        url += "?lat=" + center.lat;
         url += "&lng=" + center.lng;
+        url += "&zoom=" + map.getZoom();
         
-        var active_docs = [];
+        var layer = null;
         for(var i = 0; i < docs.length; i++){
           if(docs[i].layer && docs[i].layer.getMap()){
-            active_docs.push(docs[i]);
+            url += "&layer=" + docs[i].value;
+            break;
           }
         }
         
-        if(active_docs.length > 1){
-          second = active_docs[1];
+        var pp = null;
+        for(var i = 0; i < ppDocs.length; i++){
+          if(ppDocs[i].layer && ppDocs[i].layer.getMap()){
+            pp = ppDocs[i];
+            break;
+          }
+        }
+        if(pp){
           url += "&pp";
+          if(pp.value == "early"){
+            url += "=early";
+          }
         }
         
-        var first = active_docs[0];
-        var second = null;
-        
-        if(first.value == "pollingplace"){
-          var swap = first;
-          first = second;
-          second = swap;
-        }
-        url += "&layer=" + first.value;
+        return url;
+      }
+      
+      function on(){
+        url = gen_sharing_url();
         
         document.getElementById("sharing-url").value = url;
         document.getElementById("modal").style.visibility = "visible";
