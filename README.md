@@ -77,7 +77,7 @@ This parameter determines the map layer that is displayed when the page loads.
 
 #### pp
 
-`pp` does not need to `=` anything. Its mere presence in the url causes the Polling Place layer to display automatically when the page loads.
+If `pp` is set to `early`, then the early voting locations are displayed automatically when the page loads.  If `pp` is set to anything else or is simply present without being set to anything, then the election-day polling places are displayed automatically when the page loads.
 
 #### bounds
 
