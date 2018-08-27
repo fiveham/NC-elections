@@ -21,9 +21,10 @@ The map includes layers for
 * Superior Court districts
 * District Court districts
 * Precincts
-* Polling Places
+* Polling Places for November 6
+* Early Voting Places
 
-Choose a layer from the dropdown menu labeled "Choose Map" on the left.
+Choose a district map layer and a polling place layer to display from the menu on the left.
 
 ### Features
 
