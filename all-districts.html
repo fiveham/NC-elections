@@ -669,13 +669,13 @@
           map.fitBounds(bounds);
         }
         
-        /* Testing the house layer KML */
+        /* Testing the house layer KML * /
         docs[0].layer = new google.maps.KmlLayer({
           url: 'https://fiveham.github.io/NC-elections/kml/Map%20House.kml',
           preserveViewport: true,
           zIndex: 0
         });
-        /* End testing house layer KML */
+        / * End testing house layer KML */
         
         //turn on the initial map layers
         var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
