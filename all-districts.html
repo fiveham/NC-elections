@@ -424,6 +424,14 @@
       var ppDocs = [{docId:"15JEm_-AqJqi9Ju9X0URTb6bpKu76XxH3fzTEqXim", templateId: 2, layer:null, select:"latlong",       value:"pollingplace"}, 
                     {docId:"1SWHiu8MZn5P_WbpjlGmdotrWkt9Jx8CgVsgzaNAO", templateId: 2, layer:null, select:"col5\x3e\x3e0", value:"early"}];
       
+      /* Testing the house layer KML */
+      docs[0].layer = new google.maps.KmlLayer({
+        url: 'https://fiveham.github.io/NC-elections/kml/Map%20House.kml',
+        preserveViewport: true,
+        zIndex: 0
+      });
+      /* End testing house layer KML */
+      
       function gen_layer(doc){
         return new google.maps.FusionTablesLayer({
           query: {
