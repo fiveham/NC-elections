@@ -413,15 +413,24 @@
                     {docId:"1SWHiu8MZn5P_WbpjlGmdotrWkt9Jx8CgVsgzaNAO", templateId: 2, layer:null, select:"col5\x3e\x3e0", value:"early"}];
       
       function gen_layer(doc){
-        return new google.maps.FusionTablesLayer({
-          query: {
-            select: doc.select,
-            from: doc.docId
-          },
-          map: map,
-          styleId: 2,
-          templateId: doc.templateId
-        });
+        if(doc.select){
+          return new google.maps.FusionTablesLayer({
+            query: {
+              select: doc.select,
+              from: doc.docId
+            },
+            map: map,
+            styleId: 2,
+            templateId: doc.templateId
+          });
+        } else {
+          return new google.maps.KmlLayer({
+            map: map,
+            perserveViewport: true,
+            zIndex: doc.z,
+            url: '/NC-elections/kml/'+doc.file
+          });
+        }
       }
       
       function hookUpMap(doc){
