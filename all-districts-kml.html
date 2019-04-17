@@ -399,18 +399,18 @@
       var map;
       var marker;
       var icon;
-      var docs = [{  docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, select:"geometry",      value:"house"},
-                  {  docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, select:"geometry",      value:"senate"},
-                  {  docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, select:"geometry",      value:"statewide"},
-                  {  docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, select:"geometry",      value:"prosecutorial"},
-                  {  docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, select:"geometry",      value:"congress"},
-                  {  docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry",      value:"county"},
-                  {  docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, select:"geometry",      value:"superior"},
-                  {  docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, select:"geometry",      value:"district"},
-                  {  docId:"1wSQK0mnN5gpx_yZ7KCa-T96A3WcURImqEAe6F1uw", templateId: 2, layer:null, select:"geometry",      value:"precinct"}];
+      var docs = [{  file:'Map_House.kmz',         z:0, value:'house',         layer:null},
+                  {  file:'Map_Senate.kmz',        z:0, value:'senate',        layer:null},
+                  {  file:'Map_Statewide.kml',     z:0, value:'statewide',     layer:null},
+                  {  file:'Map_Prosecutorial.kmz', z:0, value:'prosecutorial', layer:null},
+                  {  file:'Map_Congressional.kmz', z:0, value:"congress",      layer:null},
+                  {  file:'', z:0, docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry", value:"county"},
+                  {  file:'Map_SCD.kmz',           z:0, value:"superior",      layer:null},
+                  {  file:'Map_DCD.kmz',           z:0, value:"district",      layer:null},
+                  {  file:'', z:0, docId:"1wSQK0mnN5gpx_yZ7KCa-T96A3WcURImqEAe6F1uw", templateId: 2, layer:null, select:"geometry", value:"precinct"}];
       
-      var ppDocs = [{docId:"15JEm_-AqJqi9Ju9X0URTb6bpKu76XxH3fzTEqXim", templateId: 2, layer:null, select:"latlong",       value:"pollingplace"}, 
-                    {docId:"1SWHiu8MZn5P_WbpjlGmdotrWkt9Jx8CgVsgzaNAO", templateId: 2, layer:null, select:"col5\x3e\x3e0", value:"early"}];
+      var ppDocs = [{file:'Map_Polling_Places_OCT.kmz', z:1, value:"pollingplace", layer:null}, 
+                    {file:'Map_OSSite.kml',             z:1, value:"early",        layer:null}];
       
       function gen_layer(doc){
         if(doc.select){
