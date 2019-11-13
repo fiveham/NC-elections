@@ -430,29 +430,31 @@
       var map;
       var marker;
       var icon;
-      var docs = [{  docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, select:"geometry",      value:"house"},
-                  {  docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, select:"geometry",      value:"senate"},
-                  {  docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, select:"geometry",      value:"statewide"},
-                  {  docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, select:"geometry",      value:"prosecutorial"},
-                  {  docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, select:"geometry",      value:"congress"},
-                  {  docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry",      value:"county"},
-                  {  docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, select:"geometry",      value:"superior"},
-                  {  docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, select:"geometry",      value:"district"},
-                  {  docId:"1wSQK0mnN5gpx_yZ7KCa-T96A3WcURImqEAe6F1uw", templateId: 2, layer:null, select:"geometry",      value:"precinct"}];
+      var docs = [{  layer:null, value:"house",         files:[]},
+                  {  layer:null, value:"senate",        files:[]},
+                  {  layer:null, value:"statewide",     files:[]},
+                  {  layer:null, value:"prosecutorial", files:[]},
+                  {  layer:null, value:"congress",      files:[]},
+                  {  layer:null, value:"county",        files:[]},
+                  {  layer:null, value:"superior",      files:[]},
+                  {  layer:null, value:"district",      files:[]},
+                  {  layer:null, value:"precinct",      files:[]}];
+      /* TODO put in file names */
+      var ppDocs = [{layer:null, value:"pollingplace",  files:[]}, 
+                    {layer:null, value:"early",         files:[]}];
       
-      var ppDocs = [{docId:"15JEm_-AqJqi9Ju9X0URTb6bpKu76XxH3fzTEqXim", templateId: 2, layer:null, select:"latlong",       value:"pollingplace"}, 
-                    {docId:"1SWHiu8MZn5P_WbpjlGmdotrWkt9Jx8CgVsgzaNAO", templateId: 2, layer:null, select:"col5\x3e\x3e0", value:"early"}];
-      
+      /* TODO import/load kmllayer and Layer */
       function gen_layer(doc){
-        return new google.maps.FusionTablesLayer({
-          query: {
-            select: doc.select,
-            from: doc.docId
-          },
-          map: map,
-          styleId: 2,
-          templateId: doc.templateId
-        });
+        var files = doc.files;
+        if files.length === 1{
+          return kmllayer(files[0]);
+        } else{
+          var kmls = [];
+          for(var i = 0; i < files.length; i++){
+            kmls.push(kmllayer(files[i]));
+          }
+          return new Layer(kmls);
+        }
       }
       
       function hookUpMap(doc){
