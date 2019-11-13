@@ -25,6 +25,18 @@
     -->
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <meta property="og:image" content="http://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
+    <meta property="og:image:url" content="http://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
+    <meta property="og:image:secure_url" content="https://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
+    <meta property="og:image:alt" content="A screenshot of this interactive map of North Carolina, with the county layer turned on and no polling places" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="856" />
+    <meta property="og:image:height" content="773" />
+    <meta property="og:url" content="https://fiveham.github.io/NC-elections/all-districts" />
+    <meta property="og:type" content="website" />
+    <meta property="og:determiner" content="" />
+    <meta property="og:title" content="NC Midterms 2018 - Interactive Map" />
+    <meta property="og:description" content="Interactive map of polling places, districts, and candidates for the 2018 midterm election November 6th" />
     
     <title>NC Midterms 2018 - Interactive Map</title>
     <style>
@@ -330,7 +342,8 @@
   <body>
     
     <!-- Geolocator button -->
-    <div id="geolocation" class="geolocate installed-controls top-control" onclick="geolocate();" role="button" title="Go to your geolocation">
+    <div id="geolocation" class="geolocate installed-controls top-control" onclick="geolocate();" role="button" 
+         title="Go to your geolocation">
       <div style="width: 100%; height: 1px;"></div>
       <img src="./images/icon-157354_640.png" height="38" width="21" title="Go to your geolocation">
     </div>
@@ -347,15 +360,33 @@
           </label>
         </div>
         <select id="layer-dropdown" class="layer-dropdown" onchange="updateLayers();">
-          <option value="house" title="Show districts for the North Carolina state house of representatives">State House</option>
-          <option value="senate" title="Show districts for the North Carolina state senate">State Senate</option>
-          <option value="statewide" title="Show layer for statewide offices and issues">Statewide</option>
-          <option value="prosecutorial" title="Show districts for District Attorney">Prosecutorial</option>
-          <option value="congress" title="Show districts for the United States House of Representatives">Congressional</option>
-          <option value="county" title="Show counties">County</option>
-          <option value="superior" title="Show districts for North Carolina superior court">Superior Court</option>
-          <option value="district" title="Show districts for North Carolina district court">District Court</option>
-          <option value="precinct" title="Show electoral precincts">Voting Precincts</option>
+          <option value="house" 
+                  title="Show districts for the North Carolina state house of representatives">
+            State House</option>
+          <option value="senate" 
+                  title="Show districts for the North Carolina state senate">
+            State Senate</option>
+          <option value="statewide" 
+                  title="Show layer for statewide offices and issues">
+            Statewide</option>
+          <option value="prosecutorial" 
+                  title="Show districts for District Attorney">
+            Prosecutorial</option>
+          <option value="congress" 
+                  title="Show districts for the United States House of Representatives">
+            Congressional</option>
+          <option value="county" 
+                  title="Show counties">
+            County</option>
+          <option value="superior" 
+                  title="Show districts for North Carolina superior court">
+            Superior Court</option>
+          <option value="district" 
+                  title="Show districts for North Carolina district court">
+            District Court</option>
+          <option value="precinct" 
+                  title="Show electoral precincts">
+            Voting Precincts</option>
         </select>
       </div>
       <div title="Choose a set of polling places" class="hr-bottom">
@@ -399,38 +430,29 @@
       var map;
       var marker;
       var icon;
-      var docs = [{  file:'Map_House.kmz',         z:0, value:'house',         layer:null},
-                  {  file:'Map_Senate.kmz',        z:0, value:'senate',        layer:null},
-                  {  file:'Map_Statewide.kml',     z:0, value:'statewide',     layer:null},
-                  {  file:'Map_Prosecutorial.kmz', z:0, value:'prosecutorial', layer:null},
-                  {  file:'Map_Congressional.kmz', z:0, value:"congress",      layer:null},
-                  {  file:'', z:0, docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry", value:"county"},
-                  {  file:'Map_SCD.kmz',           z:0, value:"superior",      layer:null},
-                  {  file:'Map_DCD.kmz',           z:0, value:"district",      layer:null},
-                  {  file:'', z:0, docId:"1wSQK0mnN5gpx_yZ7KCa-T96A3WcURImqEAe6F1uw", templateId: 2, layer:null, select:"geometry", value:"precinct"}];
+      var docs = [{  docId:"1n1hdJZLRStlIZA8K0TKdtq6kXZt3JVo9Ii2bRONj", templateId: 2, layer:null, select:"geometry",      value:"house"},
+                  {  docId:"1WZDuAjipPtq5amQyBKDvgevyTDHeKEV9ol9X_MUr", templateId: 2, layer:null, select:"geometry",      value:"senate"},
+                  {  docId:"1zJU1Qe9zBbGUWco7i8qjVe6C0bBJq5YMZVF4A2ZP", templateId: 2, layer:null, select:"geometry",      value:"statewide"},
+                  {  docId:"1b02qjP5mCjBNK80uHctZfXhYqZP0fzisGJXYG8KI", templateId: 2, layer:null, select:"geometry",      value:"prosecutorial"},
+                  {  docId:"1-yQcmQaSPo-O2bYAKHlL3an1Ferv6gyffzhZJC-T", templateId: 3, layer:null, select:"geometry",      value:"congress"},
+                  {  docId:"1uP-G0nMrAdaaobSl_CTdBW11hhK1xUmLIbNdqp3K", templateId: 2, layer:null, select:"geometry",      value:"county"},
+                  {  docId:"1UD87OisW8cSkdZ334R0Y82DM0Uu8zuosHLrkhspz", templateId: 2, layer:null, select:"geometry",      value:"superior"},
+                  {  docId:"1BlEwGRVlZqoxoLYTEe5bwc4Fi81KTtENMvgbS7J9", templateId: 2, layer:null, select:"geometry",      value:"district"},
+                  {  docId:"1wSQK0mnN5gpx_yZ7KCa-T96A3WcURImqEAe6F1uw", templateId: 2, layer:null, select:"geometry",      value:"precinct"}];
       
-      var ppDocs = [{file:'Map_Polling_Places_OCT.kmz', z:1, value:"pollingplace", layer:null}, 
-                    {file:'Map_OSSite.kml',             z:1, value:"early",        layer:null}];
+      var ppDocs = [{docId:"15JEm_-AqJqi9Ju9X0URTb6bpKu76XxH3fzTEqXim", templateId: 2, layer:null, select:"latlong",       value:"pollingplace"}, 
+                    {docId:"1SWHiu8MZn5P_WbpjlGmdotrWkt9Jx8CgVsgzaNAO", templateId: 2, layer:null, select:"col5\x3e\x3e0", value:"early"}];
       
       function gen_layer(doc){
-        if(doc.select){
-          return new google.maps.FusionTablesLayer({
-            query: {
-              select: doc.select,
-              from: doc.docId
-            },
-            map: map,
-            styleId: 2,
-            templateId: doc.templateId
-          });
-        } else {
-          return new google.maps.KmlLayer({
-            map: map,
-            perserveViewport: true,
-            zIndex: doc.z,
-            url: '/NC-elections/kml/'+doc.file
-          });
-        }
+        return new google.maps.FusionTablesLayer({
+          query: {
+            select: doc.select,
+            from: doc.docId
+          },
+          map: map,
+          styleId: 2,
+          templateId: doc.templateId
+        });
       }
       
       function hookUpMap(doc){
@@ -624,16 +646,9 @@
       }
       
       function initAutocomplete() {
-        
-        /* Testing the house layer KML */
-        docs[0].layer = new google.maps.KmlLayer({
-          url: 'http://fiveham.github.io/NC-elections/kml/Map%20House.kmz',
-          preserveViewport: true
-        });
-        /* End testing house layer KML */
-        
         var url_params = get_url_params();
         map = gen_map(url_params);
+        
         var triggers = ["tilesloaded","mousemove","zoom_changed","idle"];
         for(var i = 0; i < triggers.length; i++){
           google.maps.event.addListenerOnce(map, triggers[i], show_extras);
@@ -673,6 +688,14 @@
         if(bounds){
           map.fitBounds(bounds);
         }
+        
+        /* Testing the house layer KML * /
+        docs[0].layer = new google.maps.KmlLayer({
+          url: 'https://fiveham.github.io/NC-elections/kml/Map%20House.kml',
+          preserveViewport: true,
+          zIndex: 0
+        });
+        / * End testing house layer KML */
         
         //turn on the initial map layers
         var layer = careful_extract(url_params, "layer", index_layer, 0, 8, 0);
