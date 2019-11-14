@@ -28,7 +28,8 @@
     <meta property="og:image" content="http://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
     <meta property="og:image:url" content="http://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
     <meta property="og:image:secure_url" content="https://fiveham.github.io/NC-elections/images/newui-county-thumb.png" />
-    <meta property="og:image:alt" content="A screenshot of this interactive map of North Carolina, with the county layer turned on and no polling places" />
+    <meta property="og:image:alt" 
+          content="A screenshot of this interactive map of North Carolina, with the county layer turned on and no polling places" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="856" />
     <meta property="og:image:height" content="773" />
@@ -36,7 +37,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:determiner" content="" />
     <meta property="og:title" content="NC Midterms 2018 - Interactive Map" />
-    <meta property="og:description" content="Interactive map of polling places, districts, and candidates for the 2018 midterm election November 6th" />
+    <meta property="og:description" 
+          content="Interactive map of polling places, districts, and candidates for the 2018 midterm election November 6th" />
     
     <title>NC Midterms 2018 - Interactive Map</title>
     <style>
@@ -401,7 +403,8 @@
           <option value="early" title="Show one-stop absentee polling places (early voting)">Early Voting</option>
         </select>
       </div>
-      <div class="layer-header sharing-click" id="sharing-click" title="Share map with current center, zoom, and layers" onclick="on();">
+      <div class="layer-header sharing-click" id="sharing-click" 
+           title="Share map with current center, zoom, and layers" onclick="on();">
         Share
       </div>
     </div>
@@ -432,7 +435,7 @@
       var icon;
       var docs = [{  layer:null, value:"house",         files:['/NC-Elections/kml/house.kmz']},
                   {  layer:null, value:"senate",        files:['/NC-Elections/kml/senate.kmz']},
-                  {  layer:null, value:"statewide",     files:[]},
+                  {  layer:null, value:"statewide",     files:['/NC-Elections/kml/statewide.kml']},
                   {  layer:null, value:"prosecutorial", files:[]},
                   {  layer:null, value:"congress",      files:[]},
                   {  layer:null, value:"county",        files:[]},
