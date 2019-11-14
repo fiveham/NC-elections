@@ -455,11 +455,11 @@
       function gen_layer(doc){
         var files = doc.files;
         if(files.length === 1){
-          return kmllayer(files[0]);
+          return kmllayer('https://fiveham.github.io' + files[0]);
         } else{
           var kmls = [];
           for(var i = 0; i < files.length; i++){
-            kmls.push(kmllayer(files[i]));
+            kmls.push(kmllayer('https://fiveham.github.io' + files[i]));
           }
           return new Layer(kmls);
         }
