@@ -433,33 +433,27 @@
       var map;
       var marker;
       var icon;
-      var docs = [{  layer:null, value:"house",         files:['/NC-Elections/kml/house.kmz']},
-                  {  layer:null, value:"senate",        files:['/NC-Elections/kml/senate.kmz']},
-                  {  layer:null, value:"statewide",     files:['/NC-Elections/kml/statewide.kml']},
-                  {  layer:null, value:"prosecutorial", files:['/NC-Elections/kml/prosecutorial.kmz']},
-                  {  layer:null, value:"congress",      files:['/NC-Elections/kml/congress.kml']},
-                  {  layer:null, value:"county",        files:['/NC-Elections/kml/countyW.kmz', 
-                                                               '/NC-Elections/kml/countyE.kmz']},
-                  {  layer:null, value:"superior",      files:['/NC-Elections/kml/scd.kmz']},
-                  {  layer:null, value:"district",      files:['/NC-Elections/kml/dcd.kmz']},
-                  {  layer:null, value:"precinct",      files:['/NC-Elections/kml/vtds0.kmz',
-                                                               '/NC-Elections/kml/vtds1.kmz',
-                                                               '/NC-Elections/kml/vtds2.kmz',
-                                                               '/NC-Elections/kml/vtds3.kmz',]}];
+      var docs = [{  layer:null, value:"house",         files:['house.kmz']},
+                  {  layer:null, value:"senate",        files:['senate.kmz']},
+                  {  layer:null, value:"statewide",     files:['statewide.kml']},
+                  {  layer:null, value:"prosecutorial", files:['prosecutorial.kmz']},
+                  {  layer:null, value:"congress",      files:['congress.kml']},
+                  {  layer:null, value:"county",        files:['countyW.kmz', 'countyE.kmz']},
+                  {  layer:null, value:"superior",      files:['scd.kmz']},
+                  {  layer:null, value:"district",      files:['dcd.kmz']},
+                  {  layer:null, value:"precinct",      files:['vtds0.kmz', 'vtds1.kmz', 'vtds2.kmz', 'vtds3.kmz',]}];
       /* TODO put in file names */
-      var ppDocs = [{layer:null, value:"pollingplace",  files:['/NC-Elections/kml/pp1.kml',
-                                                               '/NC-Elections/kml/pp2.kml',
-                                                               '/NC-Elections/kml/pp3.kml']}, 
-                    {layer:null, value:"early",         files:['/NC-Elections/kml/ossite.kml']}];
+      var ppDocs = [{layer:null, value:"pollingplace",  files:['pp1.kml', 'pp2.kml', 'pp3.kml']}, 
+                    {layer:null, value:"early",         files:['ossite.kml']}];
       
       function gen_layer(doc){
         var files = doc.files;
         if(files.length === 1){
-          return kmllayer('https://fiveham.github.io' + files[0]);
+          return kmllayer('https://fiveham.github.io/NC-elections/kml/' + files[0]);
         } else{
           var kmls = [];
           for(var i = 0; i < files.length; i++){
-            kmls.push(kmllayer('https://fiveham.github.io' + files[i]));
+            kmls.push(kmllayer('https://fiveham.github.io/NC-elections/kml/' + files[i]));
           }
           return new Layer(kmls);
         }
