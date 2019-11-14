@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Map Statewide</name><Style id="Style2-point-1"><IconStyle><color>ffee48e3</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-point-1-hover"><IconStyle><color>ffee48e3</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-line-2"><LineStyle><color>800000ff</color><width>2</width></LineStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-line-2-hover"><LineStyle><color>800000ff</color><width>2</width></LineStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-polygon-3"><LineStyle><color>ff666666</color><width>1</width></LineStyle><PolyStyle><color>7f3891e6</color></PolyStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-polygon-3-hover"><LineStyle><color>ff666666</color><width>1</width></LineStyle><PolyStyle><color>7f3891e6</color></PolyStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Placemark><name>North Carolina</name><description><![CDATA[<div class="googft-info-window">
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Map Statewide</name><Style id="Style2-point-1"><IconStyle><color>ffee48e3</color><Icon><href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href></Icon></IconStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-line-2"><LineStyle><color>800000ff</color><width>2</width></LineStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Style id="Style2-polygon-3"><LineStyle><color>ff666666</color><width>1</width></LineStyle><PolyStyle><color>7f3891e6</color></PolyStyle><BalloonStyle><text>$[description]</text></BalloonStyle></Style><Placemark><name>North Carolina</name><description><![CDATA[<div class="googft-info-window">
 <b>PROPOSED STATE CONSTITUTIONAL AMENDMENTS</b>
 <table>
 
 <tr>
 <td>More Rights for Crime Victims<br>
- (<a href="https://www2.ncleg.net/BillLookup/2017/H551" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/PDF/H551v5.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/HTML/H551v5.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookup/2017/H551" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/PDF/H551v5.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/HTML/H551v5.html" target="_blank">html</a>)</td>
 </tr>
 
 <tr>
 <td>Centralize Hunt/Fish Rules Through General Assembly<br>
- (<a href="https://www2.ncleg.net/BillLookup/2017/S677" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/PDF/S677v5.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/HTML/S677v5.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookup/2017/S677" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/PDF/S677v5.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/HTML/S677v5.html" target="_blank">html</a>)</td>
 </tr>
 
 <tr>
 <td>Four-to-Four Bipartisan Ethics/Elections Board<br>
- (<a href="https://www2.ncleg.net/BillLookup/2017E2/H4" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/PDF/H4v3.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/HTML/H4v3.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookup/2017E2/H4" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/PDF/H4v3.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/HTML/H4v3.html" target="_blank">html</a>)</td>
 </tr>
 
 <tr>
 <td>Extra Filters on Judicial Appointments<br>
- (<a href="https://www2.ncleg.net/BillLookup/2017E2/H3" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/PDF/H3v4.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/HTML/H3v4.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookup/2017E2/H3" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/PDF/H3v4.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017E2/Bills/House/HTML/H3v4.html" target="_blank">html</a>)</td>
 </tr>
 
 <tr>
 <td>Maximum 7% State Income Tax Rate<br>
- (<a href="https://www2.ncleg.net/BillLookup/2017/S75" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/PDF/S75v5.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/HTML/S75v5.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookup/2017/S75" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/PDF/S75v5.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/Senate/HTML/S75v5.html" target="_blank">html</a>)</td>
 </tr>
 
 <tr>
 <td>Require TBD Photo ID to Vote in Person<br>
- (<a href="https://www2.ncleg.net/BillLookUp/2017/H1092" target="_blank">info</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/PDF/H1092v5.pdf" target="_blank">pdf</a>)
- (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/HTML/H1092v5.html" target="_blank">html</a>)</td>
+Â (<a href="https://www2.ncleg.net/BillLookUp/2017/H1092" target="_blank">info</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/PDF/H1092v5.pdf" target="_blank">pdf</a>)
+Â (<a href="https://www.ncleg.net/Sessions/2017/Bills/House/HTML/H1092v5.html" target="_blank">html</a>)</td>
 </tr>
 
 </table>
@@ -78,7 +78,7 @@ Candidates<br>
 <tr><td>LIB</td><td>Michael Monaco, Sr.</td></tr>
 <tr><td>REP</td><td>Chuck Kitchen</td></tr>
 </table>
-</div>]]></description><styleUrl>#Style2-polygon-3-map</styleUrl><ExtendedData><Data name="Postal Abbreviation"><value>NC</value></Data><Data name="FIPS"><value>37</value></Data><Data name="Contest and Candidate Info"><value><![CDATA[<b>PROPOSED STATE CONSTITUTIONAL AMENDMENTS</b>
+</div>]]></description><styleUrl>#Style2-polygon-3</styleUrl><ExtendedData><Data name="Postal Abbreviation"><value>NC</value></Data><Data name="FIPS"><value>37</value></Data><Data name="Contest and Candidate Info"><value><![CDATA[<b>PROPOSED STATE CONSTITUTIONAL AMENDMENTS</b>
 <table>
 
 <tr>
